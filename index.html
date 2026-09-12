@@ -15,10 +15,11 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #080b12;
       color: #e8ecf5;
+      line-height: 1.7;
     }
 
     header {
-      padding: 25px 20px;
+      padding: 28px 20px;
       text-align: center;
       background: #0d111c;
       border-bottom: 1px solid #202638;
@@ -50,6 +51,10 @@
 
     .panel h2 {
       margin-top: 0;
+    }
+
+    .panel h3 {
+      margin-bottom: 8px;
     }
 
     .stats {
@@ -117,6 +122,92 @@
       padding: 5px 0;
     }
 
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .info-card {
+      background: #0d121e;
+      border: 1px solid #252c3e;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .info-card strong {
+      color: #ffffff;
+    }
+
+    details {
+      background: #0d121e;
+      border: 1px solid #252c3e;
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    details > div {
+      padding: 0 16px 16px;
+    }
+
+    .god-card {
+      margin-bottom: 12px;
+      padding: 14px;
+      background: #0d121e;
+      border: 1px solid #252c3e;
+      border-radius: 12px;
+    }
+
+    .god-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .muted {
+      color: #8993a8;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      margin: 3px 4px 3px 0;
+      border-radius: 8px;
+      background: #252c3e;
+      color: #cbd3e4;
+      font-size: 13px;
+    }
+
+    .level-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .level-table th,
+    .level-table td {
+      padding: 9px;
+      border-bottom: 1px solid #252c3e;
+      text-align: left;
+    }
+
+    .level-table th {
+      color: #aeb7c9;
+    }
+
+    footer {
+      text-align: center;
+      color: #626c80;
+      padding: 25px 15px 40px;
+      font-size: 13px;
+    }
+
     @media (max-width: 700px) {
       header h1 {
         font-size: 26px;
@@ -134,8 +225,21 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
       button {
         width: calc(50% - 14px);
+      }
+
+      .level-table {
+        font-size: 13px;
+      }
+
+      .level-table th,
+      .level-table td {
+        padding: 7px 5px;
       }
     }
   </style>
@@ -150,6 +254,7 @@
 
 <main>
 
+  <!-- 世界狀態 -->
   <section class="panel">
     <h2>🌌 世界狀態</h2>
 
@@ -179,6 +284,7 @@
   </section>
 
 
+  <!-- 世界控制 -->
   <section class="panel">
 
     <h2>⚙️ 世界控制</h2>
@@ -193,6 +299,659 @@
   </section>
 
 
+  <!-- 宇宙基本設定 -->
+  <section class="panel">
+
+    <h2>🌌 宇宙基本資料</h2>
+
+    <div class="info-grid">
+
+      <div class="info-card">
+        <strong>宇宙尺度</strong>
+        <p>
+          半徑：約 10³⁴ 光年<br>
+          直徑：約 2 × 10³⁴ 光年
+        </p>
+      </div>
+
+      <div class="info-card">
+        <strong>宇宙結構</strong>
+        <p>
+          宇宙 → 超星系團 → 星系團 → 星系 → 恆星系 → 行星
+        </p>
+      </div>
+
+      <div class="info-card">
+        <strong>生命形式</strong>
+        <p>
+          碳基、矽基、機械、電子、外星／未知生命等
+        </p>
+      </div>
+
+      <div class="info-card">
+        <strong>發展路線</strong>
+        <p>
+          科技、魔法、修仙、機械、資訊、生物科技、武道、混合及未知路線
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 文明系統 -->
+  <section class="panel">
+
+    <h2>🏛️ 文明系統</h2>
+
+    <p>
+      文明等級代表文明整體發展程度，不等同於科技等級、文明戰力或個體境界。
+    </p>
+
+    <table class="level-table">
+
+      <thead>
+        <tr>
+          <th>等級</th>
+          <th>名稱</th>
+          <th>核心特徵</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Ⅰ</td>
+          <td>初生文明</td>
+          <td>形成穩定社會、文化與技術，主要活動於單一行星局部。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅱ</td>
+          <td>行星文明</td>
+          <td>基本掌握母星，形成全球性文明體系。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅲ</td>
+          <td>星際文明</td>
+          <td>能穩定跨越恆星系，建立多星球與多恆星系文明網路。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅳ</td>
+          <td>星系文明</td>
+          <td>能控制大量恆星系，形成大規模星系內交通與能源網路。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅴ</td>
+          <td>超星系文明</td>
+          <td>能跨越多個星系，建立超大尺度文明疆域。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅵ</td>
+          <td>星域文明</td>
+          <td>能控制龐大宇宙區域，具備成熟高階超凡體系。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅶ</td>
+          <td>高等星域文明</td>
+          <td>能將高境界個體力量轉化為文明級能力。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅷ</td>
+          <td>宇宙級文明</td>
+          <td>能對宇宙尺度的時空、物質與能量進行大規模利用。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅸ</td>
+          <td>宇宙巔峰文明</td>
+          <td>深度掌握宇宙法則，擁有大量頂尖超凡存在。</td>
+        </tr>
+
+        <tr>
+          <td>Ⅹ</td>
+          <td>至高文明</td>
+          <td>常規文明最高層級，對宇宙法則與高階力量具有極致掌控能力。</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+
+  <!-- 文明評估 -->
+  <section class="panel">
+
+    <h2>📊 文明評估標準</h2>
+
+    <div class="info-grid">
+
+      <div class="info-card">
+        <strong>文明發展</strong>
+        <p>科技、魔法、修仙、機械、生物科技、資訊等發展程度。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>文明疆域</strong>
+        <p>文明實際能長期管理、利用與防衛的空間範圍。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>超凡戰力</strong>
+        <p>最高境界、高境界個體數量、平均境界與集體運用能力。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>令使體系</strong>
+        <p>令使數量、組織規模、所屬星神與對文明的影響。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>星神關聯</strong>
+        <p>文明可以同時與多位星神建立不同程度的關係。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>文明戰力</strong>
+        <p>獨立於文明等級，可高於或低於文明自身發展程度。</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 文明疆域 -->
+  <section class="panel">
+
+    <h2>🗺️ 文明疆域</h2>
+
+    <div class="info-grid">
+
+      <div class="info-card">
+        <strong>核心疆域</strong>
+        <p>文明高度控制、人口與基礎設施最密集的區域。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>有效疆域</strong>
+        <p>能長期穩定管理、利用與防衛的區域，是文明等級的重要參考。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>勢力範圍</strong>
+        <p>文明具有影響力，但沒有完整控制權的區域。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>宣稱疆域</strong>
+        <p>文明聲稱擁有，但實際控制能力不足的區域。</p>
+      </div>
+
+    </div>
+
+    <p class="muted">
+      文明疆域不必連續，也不一定呈現規則形狀。
+      個體活動範圍不等於文明疆域。
+    </p>
+
+  </section>
+
+
+  <!-- 境界 -->
+  <section class="panel">
+
+    <h2>⚔️ 境界體系</h2>
+
+    <p>
+      神律值以冪次表示。境界是個體力量層次，
+      與文明等級及令使身份分開計算。
+    </p>
+
+    <table class="level-table">
+
+      <thead>
+        <tr>
+          <th>境界</th>
+          <th>冪次範圍</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr><td>凡塵</td><td>0～3</td></tr>
+        <tr><td>靈境</td><td>3～6</td></tr>
+        <tr><td>玄途</td><td>6～10</td></tr>
+        <tr><td>破界</td><td>10～16</td></tr>
+        <tr><td>斷律</td><td>16～24</td></tr>
+        <tr><td>超脫</td><td>24～34</td></tr>
+        <tr><td>界域</td><td>34～45</td></tr>
+        <tr><td>天域</td><td>45～60</td></tr>
+        <tr><td>道域</td><td>60～80</td></tr>
+        <tr><td>太虛</td><td>80～120</td></tr>
+        <tr><td>準神</td><td>120～180</td></tr>
+        <tr><td>神衍</td><td>180～300</td></tr>
+        <tr><td>不朽</td><td>300～500</td></tr>
+        <tr><td>無相</td><td>500～800</td></tr>
+        <tr><td>造化</td><td>800～1200</td></tr>
+        <tr><td>至尊</td><td>1200～1800</td></tr>
+        <tr><td>主宰</td><td>1800+</td></tr>
+      </tbody>
+
+    </table>
+
+    <p class="muted">
+      神衍並非真正的神級；不朽才是神級起點。
+      令使身份與境界並非同一套系統。
+    </p>
+
+  </section>
+
+
+  <!-- 星神陣營 -->
+  <section class="panel">
+
+    <h2>✨ 星神體系</h2>
+
+    <p>
+      星神是真正存在於宇宙中的神祇，可以自由行走於宇宙各處。
+      部分星神擁有神殿、聖域或固定基地。
+    </p>
+
+    <details>
+      <summary>🌱 始源</summary>
+      <div>
+        <span class="tag">創世</span>
+        <span class="tag">潮汐</span>
+        <span class="tag">裂變</span>
+        <span class="tag">異骸</span>
+        <span class="tag">森源</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>⚙️ 永衡</summary>
+      <div>
+        <span class="tag">永序</span>
+        <span class="tag">機序</span>
+        <span class="tag">光裁</span>
+        <span class="tag">凍寂</span>
+        <span class="tag">磐古</span>
+        <span class="tag">求知</span>
+        <span class="tag">界域</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>🌌 無界</summary>
+      <div>
+        <span class="tag">深淵</span>
+        <span class="tag">虛構</span>
+        <span class="tag">夜噬</span>
+        <span class="tag">混沌</span>
+        <span class="tag">夢境</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>🔥 極境</summary>
+      <div>
+        <span class="tag">焚耀</span>
+        <span class="tag">燦爆</span>
+        <span class="tag">紛爭</span>
+        <span class="tag">劍道</span>
+        <span class="tag">魔淵</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>☠️ 終歸</summary>
+      <div>
+        <span class="tag">腐朽</span>
+        <span class="tag">空脹</span>
+        <span class="tag">冥終</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>🩷 映心</summary>
+      <div>
+        <span class="tag">荊刺</span>
+        <span class="tag">聖映</span>
+        <span class="tag">情律</span>
+        <span class="tag">聲律</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>⚫ 寂滅</summary>
+      <div>
+        <span class="tag">歸寂</span>
+        <span class="tag">湮滅</span>
+      </div>
+    </details>
+
+    <details>
+      <summary>🌄 啟明</summary>
+      <div>
+        <span class="tag">星火</span>
+        <span class="tag">曙願</span>
+        <span class="tag">斷望</span>
+        <span class="tag">天命</span>
+      </div>
+    </details>
+
+  </section>
+
+
+  <!-- 已知星神 -->
+  <section class="panel">
+
+    <h2>🌠 已知星神</h2>
+
+    <div class="god-card">
+      <div class="god-name">創世・亞恩</div>
+      <div class="muted">〈創世〉 · 主宰高階</div>
+      <p>神律值：9.97 × 10⁴²⁰⁰</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">歸寂・塞爾諾</div>
+      <div class="muted">〈歸寂〉 · 主宰</div>
+      <p>神律值：9.96 × 10⁴¹⁹⁹</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">混沌・赫爾彌亞</div>
+      <div class="muted">〈混沌〉 · 主宰</div>
+      <p>神律值：9.88 × 10⁴¹⁸⁵</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">永序・歐洛斯</div>
+      <div class="muted">〈永序〉 · 主宰</div>
+      <p>神律值：8.74 × 10³⁸⁰⁰</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">界域・塞菲拉</div>
+      <div class="muted">〈界域〉 · 主宰</div>
+      <p>神律值：6.84 × 10³⁷⁸⁶</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">湮滅・卡爾戈斯</div>
+      <div class="muted">〈湮滅〉 · 主宰</div>
+      <p>神律值：7.86 × 10³⁶⁵⁰</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">天命・卡爾迪斯</div>
+      <div class="muted">〈天命〉 · 主宰</div>
+      <p>神律值：7.92 × 10³⁸⁹⁶</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">深淵・XIII</div>
+      <div class="muted">〈深淵〉 · 主宰</div>
+      <p>神律值：1.02 × 10²⁵²¹</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">冥終・渡隱</div>
+      <div class="muted">〈冥終〉 · 主宰</div>
+      <p>神律值：2.18 × 10²⁵¹⁵</p>
+    </div>
+
+    <div class="god-card">
+      <div class="god-name">潮汐・瀾</div>
+      <div class="muted">〈潮汐〉 · 主宰</div>
+      <p>神律值：7.92 × 10¹⁸⁴⁸</p>
+    </div>
+
+  </section>
+
+
+  <!-- 創世令使 -->
+  <section class="panel">
+
+    <h2>👑 創世令使——「初構十二柱」</h2>
+
+    <p>
+      創世・亞恩曾遊歷尚未完成的宇宙，尋找到十二個最接近「創造本質」的生命，
+      並賦予其十二種原初創造權能。
+      他們並非單純的工具，而被視為共同創造者。
+    </p>
+
+    <details>
+      <summary>1. 原律之柱——阿爾卡</summary>
+      <div>
+        <p>神律值：9.62 × 10²⁷⁶</p>
+        <p>境界：神衍·高階</p>
+        <p>職責：掌管法則誕生，定義因果、數學與物理規律。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>2. 時序之柱——賽洛斯</summary>
+      <div>
+        <p>神律值：9.71 × 10²⁸⁰</p>
+        <p>境界：神衍·高階</p>
+        <p>職責：掌管時間草稿，曾創造數百種不同時間結構。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>3. 星海之柱——維斯塔</summary>
+      <div>
+        <p>神律值：8.74 × 10⁹⁵</p>
+        <p>境界：太虛·中階</p>
+        <p>職責：創造星系雛形，塑造宇宙尺度星體排列與天體結構。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>4. 生命之柱——艾歐恩</summary>
+      <div>
+        <p>神律值：9.35 × 10¹⁶⁸</p>
+        <p>境界：準神·高階</p>
+        <p>職責：掌管生命原型，無數種族可追溯至生命草稿。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>5. 靈識之柱——諾彌亞</summary>
+      <div>
+        <p>神律值：8.91 × 10¹¹⁸</p>
+        <p>境界：太虛·高階</p>
+        <p>職責：掌管意識與思維，構築智慧生命自我認知的可能。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>6. 命途之柱——卡羅恩</summary>
+      <div>
+        <p>神律值：9.88 × 10²⁸⁸</p>
+        <p>境界：神衍·高階</p>
+        <p>職責：孕育新命途雛形。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>7. 虛空之柱——維洛</summary>
+      <div>
+        <p>神律值：8.46 × 10⁷⁸</p>
+        <p>境界：道域·高階</p>
+        <p>職責：創造空間與維度，建立距離與界限。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>8. 文明之柱——奧瑞斯</summary>
+      <div>
+        <p>神律值：7.38 × 10⁶⁸</p>
+        <p>境界：道域·初階</p>
+        <p>職責：文明演化藍圖，設計智慧種族社會發展可能方向。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>9. 幻想之柱——菲賽亞</summary>
+      <div>
+        <p>神律值：8.83 × 10¹⁰⁵</p>
+        <p>境界：太虛·中階</p>
+        <p>職責：未實現的所有可能性，與〈虛構〉命途高度關聯。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>10. 萬象之柱——莫爾提斯</summary>
+      <div>
+        <p>神律值：9.14 × 10¹⁵⁵</p>
+        <p>境界：準神·高階</p>
+        <p>職責：物質與能量組合，萬物形成的基本框架。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>11. 輪迴之柱——伊萊恩</summary>
+      <div>
+        <p>神律值：9.27 × 10¹⁶⁰</p>
+        <p>境界：準神·中階</p>
+        <p>職責：循環與重生，與〈冥終〉命途長期理念衝突。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>12. 初頁之柱——普羅圖姆</summary>
+      <div>
+        <p>神律值：9.99 × 10²⁹⁹</p>
+        <p>境界：神衍·高階</p>
+        <p>職責：最神秘，傳說負責書寫宇宙最初第一頁。</p>
+      </div>
+    </details>
+
+  </section>
+
+
+  <!-- 原典議會 -->
+  <section class="panel">
+
+    <h2>📜 創世令使直轄——原典議會</h2>
+
+    <p>
+      由初構十二柱共同建立的最高組織，
+      負責維持宇宙「版本」的穩定運作。
+    </p>
+
+    <details>
+      <summary>天律院</summary>
+      <div>
+        維持基本法則與宇宙常數，防止現實規則漂移。
+        被稱為「宇宙物理的管理者」。
+      </div>
+    </details>
+
+    <details>
+      <summary>萬象院</summary>
+      <div>
+        保存所有已定義概念與知識，記錄自宇宙創世以來的版本資料。
+        被視為宇宙最大的概念檔案館。
+      </div>
+    </details>
+
+    <details>
+      <summary>諸界院</summary>
+      <div>
+        監督宇宙、位面與分支現實，維持跨世界結構。
+      </div>
+    </details>
+
+    <details>
+      <summary>定序院</summary>
+      <div>
+        修正現實錯誤與法則衝突，維持宇宙正常運作。
+        屬於較保守的穩定派。
+      </div>
+    </details>
+
+    <details>
+      <summary>造化院</summary>
+      <div>
+        研究新概念與新法則，進行安全的創造實驗。
+        屬於創新方向。
+      </div>
+    </details>
+
+  </section>
+
+
+  <!-- 星神關聯 -->
+  <section class="panel">
+
+    <h2>🔗 星神關聯</h2>
+
+    <p>
+      文明可以同時與多位星神建立關係。
+      不存在「一個文明只能隸屬於一位星神」的限制。
+    </p>
+
+    <div class="info-grid">
+
+      <div class="info-card">
+        <strong>0｜無關聯</strong>
+        <p>尚未形成有效接觸。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>1｜偶然接觸</strong>
+        <p>存在有限度的直接或間接接觸。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>2｜信仰／追隨</strong>
+        <p>文明形成穩定信仰或追隨關係。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>3｜受到眷顧</strong>
+        <p>受到星神一定程度的關注或恩賜。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>4｜令使介入</strong>
+        <p>該星神的令使直接介入文明。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>5｜星神庇護</strong>
+        <p>星神主動直接保護文明。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>6｜神之盟約</strong>
+        <p>文明與星神建立高度正式的契約關係。</p>
+      </div>
+
+      <div class="info-card">
+        <strong>7｜直屬文明</strong>
+        <p>文明成為星神直接管理或統屬的文明。</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 世界事件 -->
   <section class="panel">
 
     <h2>📜 世界事件</h2>
@@ -204,6 +963,7 @@
   </section>
 
 
+  <!-- 世界資訊 -->
   <section class="panel">
 
     <h2>🎲 世界資訊</h2>
@@ -216,6 +976,11 @@
   </section>
 
 </main>
+
+
+<footer>
+  虛構世界 · Universe Simulation
+</footer>
 
 
 <script>
@@ -348,10 +1113,6 @@
 
     world.year += 1;
 
-
-    // 很簡單的第一版世界演化
-    // 後面會換成真正的文明模擬系統
-
     if (Math.random() < 0.08) {
 
       world.civilizations += 1;
@@ -474,7 +1235,6 @@
   }
 
 
-  // 網頁開啟時自動讀取世界
   loadWorld();
 
 </script>
