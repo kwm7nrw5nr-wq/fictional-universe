@@ -128,6 +128,17 @@
     button.secondary {
       background: #30384d;
     }
+    .speed-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.speed-buttons button {
+  margin: 0;
+  min-width: 72px;
+}
 
     #eventLog {
       max-height: 220px;
@@ -281,7 +292,18 @@
   </nav>
 </header>
 <main>
+<!-- 世界事件 -->
+  <section class="panel">
 
+    <h2>📜 世界事件</h2>
+
+    <div id="eventLog">
+      尚無事件。
+    </div>
+
+  </section>
+
+  
   <!-- 世界狀態 -->
   <section class="panel">
     <h2>🌌 世界狀態</h2>
@@ -312,19 +334,32 @@
   </section>
 
 
-  <!-- 世界控制 -->
   <section class="panel">
 
-    <h2>⚙️ 世界控制</h2>
+  <h2>⚙️ 世界控制</h2>
 
-    <button onclick="startWorld()">▶️ 開始</button>
-    <button onclick="pauseWorld()" class="secondary">⏸️ 暫停</button>
-    <button onclick="speedUp()" class="secondary">⏩ 時間加速</button>
-    <button onclick="resetWorld()" class="danger">🗑️ 重置世界</button>
+  <button onclick="startWorld()">▶️ 開始</button>
+  <button onclick="pauseWorld()" class="secondary">⏸️ 暫停</button>
+  <button onclick="resetWorld()" class="danger">🗑️ 重置世界</button>
 
-    <p id="worldStatus">世界尚未啟動。</p>
+  <h3>⏱️ 世界速度</h3>
 
-  </section>
+  <div class="speed-buttons">
+    <button onclick="setSpeed(1)" class="secondary">×1</button>
+    <button onclick="setSpeed(2)" class="secondary">×2</button>
+    <button onclick="setSpeed(5)" class="secondary">×5</button>
+    <button onclick="setSpeed(10)" class="secondary">×10</button>
+    <button onclick="setSpeed(50)" class="secondary">×50</button>
+    <button onclick="setSpeed(100)" class="secondary">×100</button>
+    <button onclick="setSpeed(1000)" class="secondary">×1K</button>
+    <button onclick="setSpeed(10000)" class="secondary">×10K</button>
+    <button onclick="setSpeed(100000)" class="secondary">×100K</button>
+    <button onclick="setSpeed(1000000)" class="secondary">×1M</button>
+  </div>
+
+  <p id="worldStatus">世界尚未啟動。</p>
+
+</section>
 
 
   <!-- 宇宙基本設定 -->
@@ -748,180 +783,6 @@
   </section>
 
 
-  <!-- 創世令使 -->
-  <section class="panel">
-
-    <h2>👑 創世令使——「初構十二柱」</h2>
-
-    <p>
-      創世・亞恩曾遊歷尚未完成的宇宙，尋找到十二個最接近「創造本質」的生命，
-      並賦予其十二種原初創造權能。
-      他們並非單純的工具，而被視為共同創造者。
-    </p>
-
-    <details>
-      <summary>1. 原律之柱——阿爾卡</summary>
-      <div>
-        <p>神律值：9.62 × 10²⁷⁶</p>
-        <p>境界：神衍·高階</p>
-        <p>職責：掌管法則誕生，定義因果、數學與物理規律。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>2. 時序之柱——賽洛斯</summary>
-      <div>
-        <p>神律值：9.71 × 10²⁸⁰</p>
-        <p>境界：神衍·高階</p>
-        <p>職責：掌管時間草稿，曾創造數百種不同時間結構。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>3. 星海之柱——維斯塔</summary>
-      <div>
-        <p>神律值：8.74 × 10⁹⁵</p>
-        <p>境界：太虛·中階</p>
-        <p>職責：創造星系雛形，塑造宇宙尺度星體排列與天體結構。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>4. 生命之柱——艾歐恩</summary>
-      <div>
-        <p>神律值：9.35 × 10¹⁶⁸</p>
-        <p>境界：準神·高階</p>
-        <p>職責：掌管生命原型，無數種族可追溯至生命草稿。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>5. 靈識之柱——諾彌亞</summary>
-      <div>
-        <p>神律值：8.91 × 10¹¹⁸</p>
-        <p>境界：太虛·高階</p>
-        <p>職責：掌管意識與思維，構築智慧生命自我認知的可能。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>6. 命途之柱——卡羅恩</summary>
-      <div>
-        <p>神律值：9.88 × 10²⁸⁸</p>
-        <p>境界：神衍·高階</p>
-        <p>職責：孕育新命途雛形。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>7. 虛空之柱——維洛</summary>
-      <div>
-        <p>神律值：8.46 × 10⁷⁸</p>
-        <p>境界：道域·高階</p>
-        <p>職責：創造空間與維度，建立距離與界限。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>8. 文明之柱——奧瑞斯</summary>
-      <div>
-        <p>神律值：7.38 × 10⁶⁸</p>
-        <p>境界：道域·初階</p>
-        <p>職責：文明演化藍圖，設計智慧種族社會發展可能方向。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>9. 幻想之柱——菲賽亞</summary>
-      <div>
-        <p>神律值：8.83 × 10¹⁰⁵</p>
-        <p>境界：太虛·中階</p>
-        <p>職責：未實現的所有可能性，與〈虛構〉命途高度關聯。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>10. 萬象之柱——莫爾提斯</summary>
-      <div>
-        <p>神律值：9.14 × 10¹⁵⁵</p>
-        <p>境界：準神·高階</p>
-        <p>職責：物質與能量組合，萬物形成的基本框架。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>11. 輪迴之柱——伊萊恩</summary>
-      <div>
-        <p>神律值：9.27 × 10¹⁶⁰</p>
-        <p>境界：準神·中階</p>
-        <p>職責：循環與重生，與〈冥終〉命途長期理念衝突。</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>12. 初頁之柱——普羅圖姆</summary>
-      <div>
-        <p>神律值：9.99 × 10²⁹⁹</p>
-        <p>境界：神衍·高階</p>
-        <p>職責：最神秘，傳說負責書寫宇宙最初第一頁。</p>
-      </div>
-    </details>
-
-  </section>
-
-
-  <!-- 原典議會 -->
-  <section class="panel">
-
-    <h2>📜 創世令使直轄——原典議會</h2>
-
-    <p>
-      由初構十二柱共同建立的最高組織，
-      負責維持宇宙「版本」的穩定運作。
-    </p>
-
-    <details>
-      <summary>天律院</summary>
-      <div>
-        維持基本法則與宇宙常數，防止現實規則漂移。
-        被稱為「宇宙物理的管理者」。
-      </div>
-    </details>
-
-    <details>
-      <summary>萬象院</summary>
-      <div>
-        保存所有已定義概念與知識，記錄自宇宙創世以來的版本資料。
-        被視為宇宙最大的概念檔案館。
-      </div>
-    </details>
-
-    <details>
-      <summary>諸界院</summary>
-      <div>
-        監督宇宙、位面與分支現實，維持跨世界結構。
-      </div>
-    </details>
-
-    <details>
-      <summary>定序院</summary>
-      <div>
-        修正現實錯誤與法則衝突，維持宇宙正常運作。
-        屬於較保守的穩定派。
-      </div>
-    </details>
-
-    <details>
-      <summary>造化院</summary>
-      <div>
-        研究新概念與新法則，進行安全的創造實驗。
-        屬於創新方向。
-      </div>
-    </details>
-
-  </section>
-
-
   <!-- 星神關聯 -->
   <section class="panel">
 
@@ -979,18 +840,6 @@
   </section>
 
 
-  <!-- 世界事件 -->
-  <section class="panel">
-
-    <h2>📜 世界事件</h2>
-
-    <div id="eventLog">
-      尚無事件。
-    </div>
-
-  </section>
-
-
   <!-- 世界資訊 -->
   <section class="panel">
 
@@ -1007,7 +856,10 @@
 
 
 <footer>
-  虛構世界 · Universe Simulation
+  <div>🌌 虛構世界</div>
+  <div>版本名稱：星海初始</div>
+  <div>版本號：v0.1.0</div>
+  <div>更新日期：2026</div>
 </footer>
 
 
@@ -1135,44 +987,37 @@
   }
 
 
-  function simulateYear() {
+function simulateYears(years) {
 
-    if (!world) return;
+  if (!world) return;
+
+  for (let i = 0; i < years; i++) {
 
     world.year += 1;
 
     if (Math.random() < 0.08) {
-
       world.civilizations += 1;
-
       addEvent("一個新的文明開始形成。");
-
     }
-
 
     if (
       world.civilizations > 1 &&
       Math.random() < 0.04
     ) {
-
       world.civilizations -= 1;
-
       addEvent("一個文明消失了。");
-
     }
-
 
     if (Math.random() < 0.03) {
-
       addEvent("宇宙中發生了一次未知事件。");
-
     }
 
-
-    saveWorld();
-    updateDisplay();
-
   }
+
+  saveWorld();
+  updateDisplay();
+
+}
 
 
   function startWorld() {
@@ -1201,40 +1046,30 @@
   }
 
 
-  function runTimer() {
+ function runTimer() {
 
-    if (!running) return;
+  if (!running) return;
 
-    simulateYear();
+  let yearsToSimulate = speed;
 
-    timer = setTimeout(
-      runTimer,
-      3000 / speed
-    );
+  simulateYears(yearsToSimulate);
 
-  }
+  timer = setTimeout(
+    runTimer,
+    1000
+  );
+
+}
 
 
-  function speedUp() {
+  function setSpeed(newSpeed) {
 
-    if (speed === 1) {
+  speed = newSpeed;
 
-      speed = 5;
+  document.getElementById("worldStatus").textContent =
+    "世界運轉速度：×" + speed.toLocaleString();
 
-    } else if (speed === 5) {
-
-      speed = 20;
-
-    } else {
-
-      speed = 1;
-
-    }
-
-    document.getElementById("worldStatus").textContent =
-      "世界運轉速度：×" + speed;
-
-  }
+}
 
 
   function resetWorld() {
