@@ -35,6 +35,30 @@
       color: #8993a8;
     }
 
+    .navbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: #181f31;
+  border: 1px solid #2a3348;
+  color: #dce3f2;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.navbar a:hover {
+  background: #252e46;
+  border-color: #5865f2;
+}
     main {
       max-width: 1100px;
       margin: auto;
@@ -250,8 +274,12 @@
 <header>
   <h1>🌌 虛構世界</h1>
   <p>一個正在自行運轉的宇宙</p>
-</header>
 
+  <nav class="navbar">
+    <a href="index.html">🌌 世界</a>
+    <a href="gods.html">✨ 星神</a>
+  </nav>
+</header>
 <main>
 
   <!-- 世界狀態 -->
