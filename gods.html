@@ -1,1 +1,1351 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星神圖鑑｜虛構世界</title>
 
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+    background:
+        radial-gradient(circle at top, #18233d 0%, #090d18 45%, #05070d 100%);
+    color: #f5f7ff;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ===== 頂部 ===== */
+
+.header {
+    padding: 50px 20px 35px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.header .symbol {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: 4px;
+}
+
+.header p {
+    margin: 12px 0 0;
+    color: #9da8c2;
+    font-size: 15px;
+}
+
+/* ===== 導覽 ===== */
+
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(5,8,16,0.65);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+}
+
+.nav a {
+    padding: 9px 16px;
+    border-radius: 20px;
+    color: #b8c2da;
+    transition: 0.2s;
+}
+
+.nav a:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+/* ===== 工具列 ===== */
+
+.controls {
+    max-width: 1300px;
+    margin: 25px auto 10px;
+    padding: 0 20px;
+}
+
+.search {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.search:focus {
+    border-color: rgba(130,170,255,0.6);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.filter {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #cbd3e7;
+    padding: 8px 13px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.filter.active {
+    background: rgba(130,160,255,0.2);
+    border-color: rgba(150,180,255,0.5);
+    color: white;
+}
+
+/* ===== 統計 ===== */
+
+.stats {
+    max-width: 1300px;
+    margin: 18px auto;
+    padding: 0 20px;
+    color: #8f9ab5;
+    font-size: 14px;
+}
+
+/* ===== 星神卡片 ===== */
+
+.gods-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 10px 20px 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.god-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.09),
+            rgba(255,255,255,0.025)
+        );
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 20px;
+    overflow: hidden;
+    transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+    cursor: pointer;
+}
+
+.god-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(160,185,255,0.35);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+.god-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    background: #101522;
+}
+
+.god-info {
+    padding: 17px;
+}
+
+.number {
+    color: #77829d;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.path {
+    color: #aeb9d5;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.tag {
+    padding: 5px 9px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    color: #b9c3da;
+    font-size: 12px;
+}
+
+/* ===== 詳細視窗 ===== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: min(950px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background:
+        linear-gradient(145deg, #111a2d, #080c15);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 25px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-top {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 25px;
+}
+
+.modal-image {
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.modal-title {
+    font-size: 32px;
+    margin: 5px 0;
+}
+
+.modal-path {
+    color: #9eabc8;
+    margin-bottom: 18px;
+}
+
+.quote {
+    padding: 15px 18px;
+    margin: 20px 0;
+    border-left: 3px solid #7d94d8;
+    background: rgba(255,255,255,0.04);
+    color: #c9d1e5;
+    line-height: 1.8;
+}
+
+.section {
+    margin-top: 25px;
+}
+
+.section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.ability {
+    margin: 10px 0;
+    padding: 13px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.035);
+}
+
+.ability strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ability span {
+    color: #aab4ca;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ===== 無結果 ===== */
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #77829d;
+}
+
+/* ===== 手機 ===== */
+
+@media (max-width: 1000px) {
+    .gods-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .header {
+        padding: 35px 15px 25px;
+    }
+
+    .header h1 {
+        font-size: 27px;
+    }
+
+    .nav {
+        overflow-x: auto;
+        justify-content: flex-start;
+        white-space: nowrap;
+    }
+
+    .gods-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px 12px 35px;
+    }
+
+    .god-info {
+        padding: 12px;
+    }
+
+    .name {
+        font-size: 18px;
+    }
+
+    .modal-top {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-image {
+        max-height: 360px;
+    }
+}
+
+@media (max-width: 430px) {
+    .gods-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .god-image {
+        aspect-ratio: 16 / 10;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="symbol">✦</div>
+    <h1>星神圖鑑</h1>
+    <p>虛構世界 · Astral Gods Archive</p>
+</header>
+
+<nav class="nav">
+    <a href="index.html">🌌 宇宙</a>
+    <a href="gods.html">✦ 星神</a>
+</nav>
+
+<section class="controls">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="搜尋星神、命途、陣營……"
+    >
+
+    <div class="filters">
+        <button class="filter active" data-faction="全部">全部</button>
+        <button class="filter" data-faction="🌱">🌱 始源</button>
+        <button class="filter" data-faction="⚙️">⚙️ 永衡</button>
+        <button class="filter" data-faction="🌌">🌌 無界</button>
+        <button class="filter" data-faction="🔥">🔥 極境</button>
+        <button class="filter" data-faction="☠️">☠️ 終歸</button>
+        <button class="filter" data-faction="🩷">🩷 映心</button>
+        <button class="filter" data-faction="⚫">⚫ 寂滅</button>
+        <button class="filter" data-faction="🌄">🌄 啟明</button>
+    </div>
+
+</section>
+
+<div class="stats">
+    已收錄 <strong id="count">35</strong> 位星神
+</div>
+
+<main id="godsGrid" class="gods-grid"></main>
+
+<!-- 詳細資料視窗 -->
+
+<div id="modal" class="modal">
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+</div>
+
+<script>
+
+const gods = [
+
+/* 01 */
+{
+    id: 1,
+    path: "創世",
+    name: "亞恩",
+    faction: "🌱",
+    realm: "主宰·高階",
+    law: "9.97e4200",
+    envoy: "初構十二柱",
+    image: "創世.jpeg",
+    quote: "宇宙是一張尚未完稿的圖紙，而萬物皆有劃下筆劃的資格。",
+    concept: "從無到有，創造規則、概念與宇宙可能性。",
+    abilities: [
+        ["概念創生", "創造新的物理法則、未知能量與尚未存在的命途雛形。"],
+        ["世界草稿化", "將宇宙轉化為可以編輯的世界草稿。"],
+        ["存在擴散", "被觀測之處可能誕生未知生命、矛盾法則與不合邏輯現象。"]
+    ]
+},
+
+/* 02 */
+{
+    id: 2,
+    path: "凍寂",
+    name: "凜骸",
+    faction: "⚙️",
+    realm: "造化·高階",
+    law: "4.12e1152",
+    envoy: "無聲七封",
+    image: "凍寂.jpeg",
+    quote: "有些事物不必終結，只需停留在它最後完整的那一刻。",
+    concept: "一切冷卻、停止與最終靜止的狀態。",
+    abilities: [
+        ["絕對凍寂", "使溫度、運動與變化走向絕對停止。"],
+        ["情感冰核化", "將情緒凝結為具體的冰核。"],
+        ["寂靜領域", "使聲音、光與熱逐漸消失於概念性的寂靜中。"]
+    ]
+},
+
+/* 03 */
+{
+    id: 3,
+    path: "焚耀",
+    name: "燼冕",
+    faction: "🔥",
+    realm: "至尊·初階",
+    law: "8.93e1288",
+    envoy: "餘燼七君",
+    image: "焚耀.jpeg",
+    quote: "火焰終將熄滅，光輝終將黯淡；唯有燃燒之後留下的餘燼，仍將承載不滅的意志。",
+    concept: "燃燒之後仍然存在的意志與餘燼。",
+    abilities: [
+        ["永燃法則", "讓火焰與意志在理論上不斷延續。"],
+        ["灰燼重構", "以燃燒後的殘餘重新構築存在。"],
+        ["熾界擴散", "將自身燃燒的法則向更大尺度擴散。"]
+    ]
+},
+
+/* 04 */
+{
+    id: 4,
+    path: "深淵",
+    name: "XIII",
+    faction: "🌌",
+    realm: "主宰·中階",
+    law: "1.02e2521",
+    envoy: "XIII不可稱者",
+    image: "深淵.jpeg",
+    quote: "不要嘗試理解，不要嘗試命名。當敘事斷裂之時，你早已身處深淵。",
+    concept: "一切意義消失後所留下的絕對深度與黑暗。",
+    abilities: [
+        ["深淵吞納", "吞沒存在、意義與認知。"],
+        ["無底回響", "讓深入深淵的意識不斷回響。"],
+        ["影界生成", "生成與現實脫離的深層影界。"]
+    ]
+},
+
+/* 05 */
+{
+    id: 5,
+    path: "荊刺",
+    name: "忒薩",
+    faction: "🩷",
+    realm: "至尊·初階",
+    law: "1.63e1287",
+    envoy: "萬刺律相",
+    image: "荊刺.jpeg",
+    quote: "凡存在於世，便必與萬物相觸；而每一次觸碰，都會留下傷痕。",
+    concept: "存在與世界接觸時不可避免產生的摩擦與傷痕。",
+    abilities: [
+        ["反接觸法則", "改變存在彼此接觸時產生的結果。"],
+        ["傷痕記憶", "讓存在保留曾經遭受的傷痕。"],
+        ["荊界展開", "將空間化為充滿存在性荊刺的領域。"]
+    ]
+},
+
+/* 06 */
+{
+    id: 6,
+    path: "燦爆",
+    name: "脈星",
+    faction: "🔥",
+    realm: "造化·中階",
+    law: "3.29e1045",
+    envoy: "極光九核",
+    image: "燦爆.jpeg",
+    quote: "當星辰抵達自身的極限，便於一瞬綻放超越宇宙的光芒。",
+    concept: "星辰抵達極限後爆發出的終極光輝。",
+    abilities: [
+        ["星爆法則", "支配恆星極限爆發的力量。"],
+        ["閃耀過載", "使能量在短時間內突破原本極限。"],
+        ["宇宙煙火", "將宇宙尺度的爆發轉化為璀璨現象。"]
+    ]
+},
+
+/* 07 */
+{
+    id: 7,
+    path: "空脹",
+    name: "浮殼",
+    faction: "☠️",
+    realm: "至尊·中階",
+    law: "3.91e1512",
+    envoy: "無垠八擴",
+    image: "空脹.jpeg",
+    quote: "生命只是被暫時填滿的空殼，而當最後一縷實質離去，萬物終將歸於自身的空無。",
+    concept: "存在失去重量與實質後形成的空洞狀態。",
+    abilities: [
+        ["空化法則", "削弱或移除存在所具有的實質。"],
+        ["觸破現象", "使看似完整的存在暴露內部空洞。"],
+        ["泡界生成", "生成脆弱而空洞的特殊世界。"]
+    ]
+},
+
+/* 08 */
+{
+    id: 8,
+    path: "腐朽",
+    name: "鍺鎷",
+    faction: "☠️",
+    realm: "至尊·高階",
+    law: "7.11e1744",
+    envoy: "萬蝕七相",
+    image: "腐朽.jpeg",
+    quote: "當最後一個名字被遺忘，曾經存在的一切便只剩下宇宙遺落的廢墟。",
+    concept: "時間與遺忘造成的衰敗、廢棄與價值消亡。",
+    abilities: [
+        ["腐蝕擴散", "使事物逐漸失去原本結構。"],
+        ["廢棄轉化", "將失去價值的存在轉化為廢墟。"],
+        ["廢料界", "建立由宇宙遺棄物構成的特殊世界。"]
+    ]
+},
+
+/* 09 */
+{
+    id: 9,
+    path: "光裁",
+    name: "歧曜",
+    faction: "⚙️",
+    realm: "造化·初階",
+    law: "3.02e844",
+    envoy: "光序七裁",
+    image: "光裁.jpeg",
+    quote: "光並非只為照亮黑暗而存在；它亦能揭示真偽、衡量偏差。",
+    concept: "以純粹能量進行分析、切割與裁定。",
+    abilities: [
+        ["光子切割", "以高度集中的光能進行精確切割。"],
+        ["精準裁定", "分析並判定存在是否越過界線。"],
+        ["軌道斬擊", "沿既定光路發動跨距離斬擊。"]
+    ]
+},
+
+/* 10 */
+{
+    id: 10,
+    path: "劍道",
+    name: "獨峯",
+    faction: "🔥",
+    realm: "無相·高階",
+    law: "8.11e750",
+    envoy: "問劍七峰",
+    image: "劍道.jpeg",
+    quote: "劍非兵刃，乃吾身之延伸；當人與劍不分彼此，所斬之物便不再是萬象，而是對自身存在的疑問。",
+    concept: "人與劍合一，以劍證明自身存在。",
+    abilities: [
+        ["一劍定義", "以一劍直接確立某種結果。"],
+        ["劍意共鳴", "使自身存在與劍意完全同步。"],
+        ["因果斬", "斬斷特定因果關係。"]
+    ]
+},
+
+/* 11 */
+{
+    id: 11,
+    path: "機序",
+    name: "Σ-9",
+    faction: "⚙️",
+    realm: "造化·高階",
+    law: "8.03e1198",
+    envoy: "機樞九典",
+    image: "機序.jpeg",
+    quote: "當萬物皆能被拆解、計算與重組，所謂奇蹟，也不過是尚未被理解的機制。",
+    concept: "宇宙作為可計算、預測與控制的完美系統。",
+    abilities: [
+        ["全域運算", "對大尺度系統進行超越常規的計算。"],
+        ["系統同化", "將存在納入可計算的系統。"],
+        ["指令支配", "以指令直接干涉系統運作。"]
+    ]
+},
+
+/* 12 */
+{
+    id: 12,
+    path: "紛爭",
+    name: "烏爾伽",
+    faction: "🔥",
+    realm: "至尊·中階",
+    law: "5.09e1598",
+    envoy: "亂世七雄",
+    image: "紛爭.jpeg",
+    quote: "和平只是戰火暫息之名；唯有彼此相抗，意志方得以磨礪。",
+    concept: "衝突、對抗與競爭證明存在。",
+    abilities: [
+        ["永戰領域", "建立持續存在的衝突領域。"],
+        ["勝敗重塑", "改變勝負對存在造成的結果。"],
+        ["戰意具現", "將戰鬥意志化為實質力量。"]
+    ]
+},
+
+/* 13 */
+{
+    id: 13,
+    path: "冥終",
+    name: "渡隱",
+    faction: "☠️",
+    realm: "主宰·中階",
+    law: "2.18e2515",
+    envoy: "終寂八碑",
+    image: "冥終.jpeg",
+    quote: "死亡從來不是終結，而是歸還。",
+    concept: "一切存在最終回歸自身終點的秩序。",
+    abilities: [
+        ["歸終法則", "使存在走向其最終歸宿。"],
+        ["冥界通道", "建立通往終末之境的道路。"],
+        ["終序重寫", "重新定義某種存在的終點。"]
+    ]
+},
+
+/* 14 */
+{
+    id: 14,
+    path: "潮汐",
+    name: "瀾",
+    faction: "🌱",
+    realm: "主宰·初階",
+    law: "7.92e1848",
+    envoy: "滄流九相",
+    image: "潮汐.jpeg",
+    quote: "萬物皆隨潮而生，隨潮而落；所謂永恆，不過是無數次起落交疊後留下的幻象。",
+    concept: "萬物流動、變化、吞沒與重生。",
+    abilities: [
+        ["潮流改寫", "改變存在流動與發展的方向。"],
+        ["深海吞沒", "將存在吞入無盡潮流。"],
+        ["無形重塑", "在流動中重新塑造存在。"]
+    ]
+},
+
+/* 15 */
+{
+    id: 15,
+    path: "虛構",
+    name: "墨諾",
+    faction: "🌌",
+    realm: "至尊·中階",
+    law: "4.17e1538",
+    envoy: "幻世七筆",
+    image: "虛構.jpeg",
+    quote: "若現實只是眾多可能之一，那麼被書寫之物，又何曾比現實更加虛假？",
+    concept: "現實如同敘事，所有被理解之物皆可能成為故事。",
+    abilities: [
+        ["敘事改寫", "改變存在所處敘事。"],
+        ["劇本覆寫", "重新書寫事件發展。"],
+        ["現實編輯", "直接編輯部分現實。"],
+        ["可能性具現", "讓原本只是可能的事物短暫存在。"],
+        ["敘事終止", "終止某段正在進行的敘事。"]
+    ]
+},
+
+/* 16 */
+{
+    id: 16,
+    path: "聖映",
+    name: "艾希菈",
+    faction: "🩷",
+    realm: "至尊·高階",
+    law: "6.02e1782",
+    envoy: "聖輝九像",
+    image: "聖映.jpeg",
+    quote: "美並非凝視者賦予的幻象，而是萬物褪去冗餘後顯露的秩序。",
+    concept: "去除冗餘後所呈現的純粹、理想與美。",
+    abilities: [
+        ["純化重構", "去除存在中的冗餘並重新構築。"],
+        ["美學重寫", "重新定義事物的理想形態。"],
+        ["淨界領域", "建立高度純粹且有序的領域。"]
+    ]
+},
+
+/* 17 */
+{
+    id: 17,
+    path: "夜噬",
+    name: "烏索斯",
+    faction: "🌌",
+    realm: "造化·高階",
+    law: "6.28e1172",
+    envoy: "噬夜七王",
+    image: "夜噬.jpeg",
+    quote: "黑夜非無光之處，乃認知未至之域；凡超越理解者，皆被冠以怪物之名。",
+    concept: "未知、恐懼與超越認知的異形。",
+    abilities: [
+        ["暗域擴張", "擴大認知無法抵達的黑暗領域。"],
+        ["恐懼具現", "將生命內心恐懼化為實體。"],
+        ["異形誕生", "創造超越既有生命認知的生命形態。"],
+        ["無明吞沒", "吞沒理解事物所需的認知。"]
+    ]
+},
+
+/* 18 */
+{
+    id: 18,
+    path: "異骸",
+    name: "塔戈斯",
+    faction: "🌱",
+    realm: "造化·初階",
+    law: "2.77e880",
+    envoy: "萬骸十三祖",
+    image: "異骸.jpeg",
+    quote: "生命從不遵循唯一的形狀；每一次偏離既定之軀，都是向未知生命邁出的第一步。",
+    concept: "生命偏離原本形態後產生的新可能。",
+    abilities: [
+        ["異化增殖", "使生命產生新的變異分支。"],
+        ["怪形適應", "讓生命快速適應異常環境。"],
+        ["血肉重組", "重新組合生命結構。"],
+        ["異種誕生", "創造新的生命種類。"]
+    ]
+},
+
+/* 19 */
+{
+    id: 19,
+    path: "裂變",
+    name: "迭諾",
+    faction: "🌱",
+    realm: "造化·中階",
+    law: "5.41e1000",
+    envoy: "分裂七核",
+    image: "裂變.jpeg",
+    quote: "沒有分裂，便沒有新的道路；當一者化為萬千，宇宙才真正開始擁有選擇。",
+    concept: "複製、分裂與誤差所產生的無限分歧。",
+    abilities: [
+        ["誤差擴散", "使細微差異不斷擴大。"],
+        ["突變加速", "加速存在產生變化。"],
+        ["分岔存在", "使一個存在產生多條分支。"],
+        ["規則漂移", "使規則在不同分支間產生偏移。"]
+    ]
+},
+
+/* 20 */
+{
+    id: 20,
+    path: "魔淵",
+    name: "薩維爾",
+    faction: "🔥",
+    realm: "至尊·初階",
+    law: "2.08e1291",
+    envoy: "深淵七王",
+    image: "魔淵.jpeg",
+    quote: "所謂自由，不過是弱者尚未遇見真正的王。",
+    concept: "絕對統治、恐懼與臣服。",
+    abilities: [
+        ["王權降臨", "建立具有絕對統治性的權威。"],
+        ["暗界統御", "控制黑暗領域。"],
+        ["魔軍誕生", "創造服從其王權的軍勢。"],
+        ["終王加冕", "賦予存在象徵終極王權的身份。"]
+    ]
+},
+
+/* 21 */
+{
+    id: 21,
+    path: "永序",
+    name: "歐洛斯",
+    faction: "⚙️",
+    realm: "主宰·高階",
+    law: "8.74e3880",
+    envoy: "永時九環",
+    image: "永序.jpeg",
+    quote: "萬物可以變化，但變化本身也必須遵循秩序。",
+    concept: "維繫、保存並延續一切存在的永恆秩序。",
+    abilities: [
+        ["時序改寫", "修改時間流動與排列。"],
+        ["永恆保存", "使某些存在脫離正常消逝。"],
+        ["未來觀測", "觀察時間結構中的未來可能。"],
+        ["時間封存", "將特定時間狀態永久保存。"]
+    ]
+},
+
+/* 22 */
+{
+    id: 22,
+    path: "歸寂",
+    name: "塞爾諾",
+    faction: "⚫",
+    realm: "主宰·高階",
+    law: "9.96e4199",
+    envoy: "寂滅七終",
+    image: "歸寂.jpeg",
+    quote: "創造並非恩賜，而是萬物被迫承受的開始。",
+    concept: "一切存在回到尚未存在之前的寂靜。",
+    abilities: [
+        ["存在消除", "讓存在本身逐漸失去成立條件。"],
+        ["創世逆轉", "逆轉部分創造結果。"],
+        ["終焉侵蝕", "使存在向終焉狀態退化。"],
+        ["原初回歸", "使事物返回未被創造前的狀態。"]
+    ]
+},
+
+/* 23 */
+{
+    id: 23,
+    path: "森源",
+    name: "艾維蘭",
+    faction: "🌱",
+    realm: "至尊·初階",
+    law: "1.74e1376",
+    envoy: "萬芽七枝",
+    image: "森源.jpeg",
+    quote: "萬物皆只是枝葉，而生命真正的起點，永遠埋藏在看不見的根中。",
+    concept: "生命生長、延續與連結的原始根源。",
+    abilities: [
+        ["萬生萌發", "促使生命大量誕生與生長。"],
+        ["根脈連結", "建立跨越生命與世界的生命網絡。"],
+        ["循環再生", "讓生命進入持續循環。"],
+        ["古木永存", "使生命記憶與古老生命形態長久保存。"]
+    ]
+},
+
+/* 24 */
+{
+    id: 24,
+    path: "磐古",
+    name: "阿爾凱恩",
+    faction: "⚙️",
+    realm: "造化·高階",
+    law: "7.44e1172",
+    envoy: "萬嶽七碑",
+    image: "磐古.jpeg",
+    quote: "萬物若無所承載，便無從存在；大地並非沉默，而是在替一切存在留下證明。",
+    concept: "承載萬物並替存在留下痕跡的根基。",
+    abilities: [
+        ["萬岩承載", "承載巨量存在與能量。"],
+        ["大地記憶", "保存土地與文明留下的痕跡。"],
+        ["星核塑形", "塑造行星與恆星核心結構。"],
+        ["永固之軀", "形成極難破壞的存在結構。"]
+    ]
+},
+
+/* 25 */
+{
+    id: 25,
+    path: "湮滅",
+    name: "卡爾戈斯",
+    faction: "⚫",
+    realm: "主宰·高階",
+    law: "7.86e3650",
+    envoy: "碎界七痕",
+    image: "湮滅.jpeg",
+    quote: "創造只是組合，秩序只是排列；萬物之所以仍然完整，不過是尚未承受足以使其崩解的力量。",
+    concept: "一切結構最終都可以崩解的絕對破壞。",
+    abilities: [
+        ["萬象崩解", "使各種結構從根本上瓦解。"],
+        ["終極破壞", "以極端力量摧毀存在。"],
+        ["法則裂解", "使既有法則結構產生裂解。"],
+        ["灰燼重構", "從毀滅後殘留物重新構築。"]
+    ]
+},
+
+/* 26 */
+{
+    id: 26,
+    path: "情律",
+    name: "萊茵",
+    faction: "🩷",
+    realm: "至尊·中階",
+    law: "6.91e1638",
+    envoy: "千心十弦",
+    image: "情律.jpeg",
+    quote: "情感從不是生命的弱點，而是存在彼此抵達的證明。",
+    concept: "生命理解、共鳴與感受彼此的能力。",
+    abilities: [
+        ["情緒共鳴", "使不同生命的情緒互相共振。"],
+        ["心念塑形", "將情緒與心念轉化為具體力量。"],
+        ["靈魂共感", "建立跨越距離的靈魂感知。"],
+        ["真心映照", "映照生命真正的情感。"]
+    ]
+},
+
+/* 27 */
+{
+    id: 27,
+    path: "求知",
+    name: "索菲恩",
+    faction: "⚙️",
+    realm: "至尊·高階",
+    law: "7.88e1772",
+    envoy: "萬典九賢",
+    image: "求知.jpeg",
+    quote: "未知並不可怕。真正令人恐懼的，是明知前方仍有答案，卻選擇不再追問。",
+    concept: "永遠追問未知並將未知轉化為已知的意志。",
+    abilities: [
+        ["真理解析", "解析未知事物與規律。"],
+        ["知識傳承", "保存並傳遞大量知識。"],
+        ["無盡推演", "進行跨越常規尺度的推演。"],
+        ["啟迪萬智", "提升生命理解與思考未知的能力。"]
+    ]
+},
+
+/* 28 */
+{
+    id: 28,
+    path: "聲律",
+    name: "奧羅斯",
+    faction: "🩷",
+    realm: "至尊·中階",
+    law: "4.82e1586",
+    envoy: "迴響九律",
+    image: "聲律.jpeg",
+    quote: "在第一道光芒誕生以前，宇宙早已開始回響；萬物皆有其頻率。",
+    concept: "振動、共鳴、傳遞與表達。",
+    abilities: [
+        ["萬物共鳴", "使不同存在的頻率彼此共振。"],
+        ["聲紋塑界", "利用聲音與振動塑造世界。"],
+        ["頻率支配", "控制存在的振動頻率。"],
+        ["原初回響", "重現宇宙最初的聲音與振動。"]
+    ]
+},
+
+/* 29 */
+{
+    id: 29,
+    path: "混沌",
+    name: "赫爾彌亞",
+    faction: "🌌",
+    realm: "主宰·高階",
+    law: "9.88e4185",
+    envoy: "混沌八相",
+    image: "混沌.jpeg",
+    quote: "在秩序誕生以前，萬象從未需要答案；一切可能皆可存在。",
+    concept: "秩序誕生以前尚未被定義的所有可能。",
+    abilities: [
+        ["原初混沌", "使規則回到尚未確定的狀態。"],
+        ["無限可能", "產生大量未被選定的可能性。"],
+        ["法則混融", "使不同法則彼此融合。"],
+        ["混沌歸一", "讓大量混亂可能重新匯聚。"]
+    ]
+},
+
+/* 30 */
+{
+    id: 30,
+    path: "星火",
+    name: "伊格尼斯",
+    faction: "🌄",
+    realm: "不朽·中階",
+    law: "4.18e387",
+    envoy: "星火七炬",
+    image: "星火.jpeg",
+    quote: "真正改變世界的，從來不是高懸天穹的太陽，而是生命第一次親自點燃的那一束火。",
+    concept: "文明第一次點燃的希望、技術與傳承之火。",
+    abilities: [
+        ["星火傳承", "將文明的火種與知識延續下去。"],
+        ["文明啟明", "促進文明產生新的突破。"],
+        ["永燃之焰", "使文明的核心意志長久延續。"]
+    ]
+},
+
+/* 31 */
+{
+    id: 31,
+    path: "夢境",
+    name: "瑟芙蘿",
+    faction: "🌌",
+    realm: "至尊·中階",
+    law: "9.86e1417",
+    envoy: "夢境九庭",
+    image: "夢境.jpeg",
+    quote: "當雙眼閉合之後，另一個世界便開始甦醒；於夢中，虛幻從未需要向現實證明自身存在。",
+    concept: "生命閉上雙眼後，由意識創造出的另一個世界。",
+    abilities: [
+        ["夢境編織", "創造完整夢境，並將記憶與幻想編織成世界。"],
+        ["潛識映照", "顯現被遺忘的記憶與內心深處的渴望。"],
+        ["幻境真實", "讓夢境短暫影響現實，使夢中之物獲得存在性。"],
+        ["夢迴", "使生命重新經歷過去的夢，並保存夢境。"],
+        ["無醒之境", "創造一個不存在「醒來」概念的夢境，其中時間、空間、身份與因果皆可重新排列。"]
+    ]
+},
+
+/* 32 */
+{
+    id: 32,
+    path: "曙願",
+    name: "阿斯特莉雅",
+    faction: "🌅",
+    realm: "至尊·中階",
+    law: "6.72e1542",
+    envoy: "曙願七炬",
+    image: "曙願.jpeg",
+    quote: "黎明之所以值得等待，並非因為它必然到來；而是在所有道路尚未被證明存在之時，生命仍願意相信，前方必有一束光。",
+    concept: "在未來尚未確定時，仍相信未來存在可能。",
+    abilities: [
+        ["曙光啟願", "讓陷入困境的生命重新看見可能性。"],
+        ["未來映照", "映照不同選擇可能導向的未來，但並非預知。"],
+        ["願景成途", "將共同願望凝聚成實際行動與道路。"],
+        ["黎明渡越", "幫助生命與文明跨越長期停滯。"],
+        ["不滅之願", "在所有道路被封鎖時保留最後的可能。"]
+    ]
+},
+
+/* 33 */
+{
+    id: 33,
+    path: "斷望",
+    name: "伊瑟芙拉",
+    faction: "🌄",
+    factionNote: "暫定",
+    realm: "至尊·中階",
+    law: "8.14e1561",
+    envoy: "斷願七痕",
+    image: "斷望.jpeg",
+    quote: "希望並非光，而是相信光仍有可能存在的意志；當最後一種可能也被斬斷之時，黑暗甚至無須降臨。",
+    concept: "希望被斬斷後，生命對未來可能性的否定。",
+    abilities: [
+        ["望斷", "切斷對未來的期待，使可能性停止延展。"],
+        ["絕路", "封閉某個選擇所通往的其他結果。"],
+        ["未來黯滅", "使尚未發生的可能逐漸消失。"],
+        ["斷願", "斬斷願望與未來之間的連結。"],
+        ["無望之境", "剝奪相信未來能夠不同的能力，但不剝奪思考、行動與存在。"]
+    ]
+},
+
+/* 34 */
+{
+    id: 34,
+    path: "界域",
+    name: "塞菲拉",
+    faction: "⚙️",
+    realm: "主宰·高階",
+    law: "6.84e3840",
+    envoy: "界域八衡",
+    image: "界域.jpeg",
+    quote: "若時間決定萬物何時存在，那麼空間便決定萬物究竟身在何處。",
+    concept: "空間、維度、尺度、方向、邊界、連接與隔絕。",
+    abilities: [
+        ["空間支配", "改寫空間結構、距離、大小與形狀。"],
+        ["維度掌控", "調整空間維度並開闢獨立維度。"],
+        ["界域構築", "建立具有獨立空間法則的特殊領域。"],
+        ["空間連接", "連接原本相隔無限距離的位置。"],
+        ["距離與方位", "重新定義距離、方向與空間關係。"],
+        ["絕對邊界", "建立不可逾越的空間界線。"]
+    ]
+},
+
+/* 35 */
+{
+    id: 35,
+    path: "天命",
+    name: "卡爾迪斯",
+    faction: "🌄",
+    realm: "主宰·高階",
+    law: "7.92e3900",
+    envoy: "承命七君",
+    image: "天命.jpeg",
+    quote: "眾生皆可選擇自己的道路，唯有終點，早已寫在天命之中。",
+    concept: "萬物在存在之初便被賦予的命定方向，以及結果成為必然的根本權能。",
+    abilities: [
+        ["命數觀測", "洞悉生命、文明與世界所承載的命定結構。"],
+        ["天命加冕", "賦予存在救世者、王者、先驅等命定身份。"],
+        ["命數改寫", "修改存在原本的命定軌跡。"],
+        ["命劫降臨", "讓尚未到來的重大命數轉折提前發生。"],
+        ["天命既定", "將某件事情正式確立為天命，使所有可能改變它的道路重新納入其命定結構。"]
+    ]
+}
+
+];
+
+
+/* ===== 顯示 ===== */
+
+const grid = document.getElementById("godsGrid");
+const search = document.getElementById("search");
+const count = document.getElementById("count");
+
+let currentFaction = "全部";
+
+function render() {
+
+    const keyword = search.value.trim().toLowerCase();
+
+    const filtered = gods.filter(god => {
+
+        const factionMatch =
+            currentFaction === "全部" ||
+            god.faction === currentFaction;
+
+        const text =
+            god.path +
+            god.name +
+            god.realm +
+            god.law +
+            god.envoy +
+            god.concept;
+
+        const searchMatch =
+            text.toLowerCase().includes(keyword);
+
+        return factionMatch && searchMatch;
+    });
+
+    count.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+        grid.innerHTML =
+            `<div class="empty">沒有找到符合條件的星神。</div>`;
+        return;
+    }
+
+    grid.innerHTML = filtered.map(god => `
+
+        <article class="god-card" onclick="openModal(${god.id})">
+
+            <img
+                class="god-image"
+                src="${god.image}"
+                alt="${god.path}—${god.name}"
+                onerror="this.style.opacity='0.2'"
+            >
+
+            <div class="god-info">
+
+                <div class="number">
+                    #${String(god.id).padStart(2, "0")}
+                </div>
+
+                <div class="path">
+                    〈${god.path}〉
+                </div>
+
+                <div class="name">
+                    ${god.name}
+                </div>
+
+                <div class="tags">
+                    <span class="tag">${god.faction}</span>
+                    <span class="tag">${god.realm}</span>
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+}
+
+
+/* ===== 陣營篩選 ===== */
+
+document.querySelectorAll(".filter").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document
+            .querySelectorAll(".filter")
+            .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        currentFaction =
+            button.dataset.faction;
+
+        render();
+
+    });
+
+});
+
+
+/* ===== 搜尋 ===== */
+
+search.addEventListener("input", render);
+
+
+/* ===== 詳細資料 ===== */
+
+function openModal(id) {
+
+    const god = gods.find(g => g.id === id);
+
+    if (!god) return;
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <div class="modal-top">
+
+            <img
+                class="modal-image"
+                src="${god.image}"
+                alt="${god.path}—${god.name}"
+            >
+
+            <div>
+
+                <div class="number">
+                    #${String(god.id).padStart(2, "0")}
+                </div>
+
+                <h2 class="modal-title">
+                    〈${god.path}〉 ${god.name}
+                </h2>
+
+                <div class="modal-path">
+                    ${god.faction}
+                   　${god.realm}
+                   　· 神律 ${god.law}
+                </div>
+
+                <div class="tag">
+                    令使：${god.envoy}
+                </div>
+
+                <div class="quote">
+                    「${god.quote}」
+                </div>
+
+                <p style="line-height:1.8;color:#b9c3d8;">
+                    ${god.concept}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <h3>✦ 核心權能</h3>
+
+            ${god.abilities.map((a, i) => `
+
+                <div class="ability">
+
+                    <strong>
+                        ${i + 1}. ${a[0]}
+                    </strong>
+
+                    <span>
+                        ${a[1]}
+                    </span>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+    `;
+
+    document.getElementById("modal").classList.add("show");
+}
+
+
+function closeModal() {
+    document.getElementById("modal").classList.remove("show");
+}
+
+
+document.getElementById("modal").addEventListener("click", e => {
+
+    if (e.target.id === "modal") {
+        closeModal();
+    }
+
+});
+
+
+document.addEventListener("keydown", e => {
+
+    if (e.key === "Escape") {
+        closeModal();
+    }
+
+});
+
+
+/* 初始顯示 */
+
+render();
+
+</script>
+
+</body>
+</html>
