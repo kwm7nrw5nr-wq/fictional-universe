@@ -18,10 +18,10 @@
     }
 
     header {
-      padding: 28px 20px;
+      padding: 25px 20px;
       text-align: center;
-      border-bottom: 1px solid #202638;
       background: #0d111c;
+      border-bottom: 1px solid #202638;
     }
 
     header h1 {
@@ -30,67 +30,91 @@
     }
 
     header p {
-      margin: 10px 0 0;
+      margin: 8px 0 0;
       color: #8993a8;
     }
 
     main {
       max-width: 1100px;
       margin: auto;
-      padding: 30px 20px;
+      padding: 25px 20px;
     }
 
-    .welcome {
-      padding: 30px;
+    .panel {
+      background: #101522;
       border: 1px solid #252c3e;
       border-radius: 16px;
-      background: #101522;
+      padding: 24px;
+      margin-bottom: 18px;
     }
 
-    .welcome h2 {
+    .panel h2 {
       margin-top: 0;
     }
 
-    .cards {
+    .stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
       margin-top: 20px;
     }
 
-    .card {
-      padding: 22px;
-      border: 1px solid #252c3e;
-      border-radius: 14px;
+    .stat {
       background: #0d121e;
+      border: 1px solid #252c3e;
+      border-radius: 12px;
+      padding: 16px;
     }
 
-    .card h3 {
-      margin-top: 0;
+    .stat-title {
+      color: #8993a8;
+      font-size: 14px;
     }
 
-    .card p {
-      color: #929caf;
-      line-height: 1.6;
+    .stat-value {
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: bold;
     }
 
     button {
-      padding: 12px 18px;
+      padding: 11px 16px;
+      margin: 5px;
       border: 0;
       border-radius: 10px;
       background: #5865f2;
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
     }
 
     button:hover {
-      opacity: 0.9;
+      opacity: 0.88;
     }
 
-    #status {
+    button.danger {
+      background: #a83f4f;
+    }
+
+    button.secondary {
+      background: #30384d;
+    }
+
+    #eventLog {
+      max-height: 220px;
+      overflow-y: auto;
       margin-top: 15px;
-      color: #9da8bd;
+      padding: 12px;
+      background: #090d15;
+      border-radius: 10px;
+      color: #aeb7c9;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .event {
+      border-bottom: 1px solid #1b2130;
+      padding: 5px 0;
     }
 
     @media (max-width: 700px) {
@@ -99,15 +123,19 @@
       }
 
       main {
-        padding: 20px 14px;
+        padding: 16px 12px;
       }
 
-      .welcome {
-        padding: 22px;
+      .panel {
+        padding: 18px;
       }
 
-      .cards {
-        grid-template-columns: 1fr;
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      button {
+        width: calc(50% - 14px);
       }
     }
   </style>
@@ -115,57 +143,341 @@
 
 <body>
 
-  <header>
-    <h1>🌌 虛構世界</h1>
-    <p>一個會自行運轉的宇宙</p>
-  </header>
+<header>
+  <h1>🌌 虛構世界</h1>
+  <p>一個正在自行運轉的宇宙</p>
+</header>
 
-  <main>
+<main>
 
-    <section class="welcome">
-      <h2>歡迎來到這個宇宙</h2>
-      <p>
-        這是一個正在自行運轉的虛構世界。
-        文明會誕生、發展、衰落，生命會突破境界，
-        而宇宙中也存在尚未被觀測的未知。
-      </p>
+  <section class="panel">
+    <h2>🌌 世界狀態</h2>
 
-      <button onclick="startWorld()">開始探索</button>
+    <div class="stats">
 
-      <div id="status">世界尚未啟動。</div>
-    </section>
-
-    <section class="cards">
-
-      <div class="card">
-        <h3>🌌 宇宙</h3>
-        <p>探索超星系團、星系團、星系與恆星系。</p>
+      <div class="stat">
+        <div class="stat-title">世界時間</div>
+        <div class="stat-value" id="worldYear">—</div>
       </div>
 
-      <div class="card">
-        <h3>🏛️ 文明</h3>
-        <p>觀察文明誕生、發展，以及高境界強者帶來的文明躍遷。</p>
+      <div class="stat">
+        <div class="stat-title">超星系團</div>
+        <div class="stat-value" id="superclusters">—</div>
       </div>
 
-      <div class="card">
-        <h3>❓ 未知</h3>
-        <p>宇宙中存在無法觀測、甚至可能極度危險的未知文明。</p>
+      <div class="stat">
+        <div class="stat-title">星系</div>
+        <div class="stat-value" id="galaxies">—</div>
       </div>
 
-    </section>
+      <div class="stat">
+        <div class="stat-title">文明</div>
+        <div class="stat-value" id="civilizations">—</div>
+      </div>
 
-  </main>
+    </div>
+  </section>
 
-  <script>
-    let worldRunning = false;
 
-    function startWorld() {
-      worldRunning = true;
+  <section class="panel">
 
-      document.getElementById("status").textContent =
-        "世界已啟動。時間開始流動……";
+    <h2>⚙️ 世界控制</h2>
+
+    <button onclick="startWorld()">▶️ 開始</button>
+    <button onclick="pauseWorld()" class="secondary">⏸️ 暫停</button>
+    <button onclick="speedUp()" class="secondary">⏩ 時間加速</button>
+    <button onclick="resetWorld()" class="danger">🗑️ 重置世界</button>
+
+    <p id="worldStatus">世界尚未啟動。</p>
+
+  </section>
+
+
+  <section class="panel">
+
+    <h2>📜 世界事件</h2>
+
+    <div id="eventLog">
+      尚無事件。
+    </div>
+
+  </section>
+
+
+  <section class="panel">
+
+    <h2>🎲 世界資訊</h2>
+
+    <p>
+      世界種子：
+      <strong id="worldSeed">—</strong>
+    </p>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const SAVE_KEY = "fictional_universe_save";
+
+  let world = null;
+  let timer = null;
+  let running = false;
+  let speed = 1;
+
+
+  function randomSeed() {
+    return Math.floor(Math.random() * 999999999);
+  }
+
+
+  function createWorld() {
+
+    return {
+      year: 1,
+
+      seed: randomSeed(),
+
+      superclusters: Math.floor(Math.random() * 8) + 3,
+
+      galaxies: Math.floor(Math.random() * 90) + 30,
+
+      civilizations: Math.floor(Math.random() * 12) + 3,
+
+      events: []
+    };
+
+  }
+
+
+  function saveWorld() {
+
+    if (!world) return;
+
+    localStorage.setItem(
+      SAVE_KEY,
+      JSON.stringify(world)
+    );
+
+  }
+
+
+  function loadWorld() {
+
+    const saved = localStorage.getItem(SAVE_KEY);
+
+    if (saved) {
+
+      try {
+
+        world = JSON.parse(saved);
+
+        addEvent("世界存檔已載入。");
+
+      } catch {
+
+        world = createWorld();
+
+        addEvent("存檔損壞，已建立新世界。");
+
+      }
+
+    } else {
+
+      world = createWorld();
+
+      addEvent("新的宇宙已生成。");
+
+      saveWorld();
+
     }
-  </script>
+
+    updateDisplay();
+
+  }
+
+
+  function updateDisplay() {
+
+    if (!world) return;
+
+    document.getElementById("worldYear").textContent =
+      "第 " + world.year + " 年";
+
+    document.getElementById("superclusters").textContent =
+      world.superclusters;
+
+    document.getElementById("galaxies").textContent =
+      world.galaxies;
+
+    document.getElementById("civilizations").textContent =
+      world.civilizations;
+
+    document.getElementById("worldSeed").textContent =
+      world.seed;
+
+  }
+
+
+  function addEvent(text) {
+
+    if (!world) return;
+
+    world.events.unshift(
+      "第 " + world.year + " 年： " + text
+    );
+
+    if (world.events.length > 50) {
+      world.events.pop();
+    }
+
+    const log = document.getElementById("eventLog");
+
+    log.innerHTML = world.events
+      .map(event => `<div class="event">${event}</div>`)
+      .join("");
+
+  }
+
+
+  function simulateYear() {
+
+    if (!world) return;
+
+    world.year += 1;
+
+
+    // 很簡單的第一版世界演化
+    // 後面會換成真正的文明模擬系統
+
+    if (Math.random() < 0.08) {
+
+      world.civilizations += 1;
+
+      addEvent("一個新的文明開始形成。");
+
+    }
+
+
+    if (
+      world.civilizations > 1 &&
+      Math.random() < 0.04
+    ) {
+
+      world.civilizations -= 1;
+
+      addEvent("一個文明消失了。");
+
+    }
+
+
+    if (Math.random() < 0.03) {
+
+      addEvent("宇宙中發生了一次未知事件。");
+
+    }
+
+
+    saveWorld();
+    updateDisplay();
+
+  }
+
+
+  function startWorld() {
+
+    if (running) return;
+
+    running = true;
+
+    document.getElementById("worldStatus").textContent =
+      "世界正在運轉……";
+
+    runTimer();
+
+  }
+
+
+  function pauseWorld() {
+
+    running = false;
+
+    clearTimeout(timer);
+
+    document.getElementById("worldStatus").textContent =
+      "世界已暫停。";
+
+  }
+
+
+  function runTimer() {
+
+    if (!running) return;
+
+    simulateYear();
+
+    timer = setTimeout(
+      runTimer,
+      3000 / speed
+    );
+
+  }
+
+
+  function speedUp() {
+
+    if (speed === 1) {
+
+      speed = 5;
+
+    } else if (speed === 5) {
+
+      speed = 20;
+
+    } else {
+
+      speed = 1;
+
+    }
+
+    document.getElementById("worldStatus").textContent =
+      "世界運轉速度：×" + speed;
+
+  }
+
+
+  function resetWorld() {
+
+    const confirmed = confirm(
+      "確定要刪除目前世界並生成全新的宇宙嗎？\n\n目前的世界資料將會消失。"
+    );
+
+    if (!confirmed) return;
+
+    pauseWorld();
+
+    localStorage.removeItem(SAVE_KEY);
+
+    world = createWorld();
+
+    addEvent("全新的宇宙誕生了。");
+
+    saveWorld();
+
+    updateDisplay();
+
+    document.getElementById("worldStatus").textContent =
+      "新的世界已建立。";
+
+  }
+
+
+  // 網頁開啟時自動讀取世界
+  loadWorld();
+
+</script>
 
 </body>
 </html>
