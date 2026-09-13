@@ -271,3 +271,206 @@ footer {
     padding: 7px 5px;
   }
 }
+/* ================================
+   宇宙探索
+   ================================ */
+
+.exploration-panel {
+  position: relative;
+}
+
+.exploration-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.exploration-location-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.exploration-path {
+  color: #999;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.exploration-back {
+  flex-shrink: 0;
+}
+
+.exploration-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.exploration-info-card {
+  padding: 14px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.exploration-info-card span {
+  display: block;
+  color: #999;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.exploration-info-card strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.exploration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.exploration-card {
+  width: 100%;
+  min-height: 105px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  color: inherit;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.exploration-card:hover {
+  transform: translateY(-2px);
+  border-color: #777;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.exploration-card:active {
+  transform: translateY(0);
+}
+
+.exploration-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  font-size: 1.7rem;
+}
+
+.exploration-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.exploration-card-name {
+  font-size: 1.05rem;
+  font-weight: bold;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exploration-card-type {
+  margin-top: 3px;
+
+  color: #aaa;
+  font-size: 0.82rem;
+}
+
+.exploration-card-description {
+  margin-top: 8px;
+
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.exploration-arrow {
+  flex-shrink: 0;
+
+  color: #888;
+  font-size: 1.6rem;
+}
+
+.exploration-empty {
+  padding: 30px;
+
+  text-align: center;
+
+  color: #777;
+}
+
+.exploration-notice {
+  grid-column: 1 / -1;
+
+  padding: 18px;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  color: #aaa;
+
+  line-height: 1.7;
+}
+
+
+/* 手機版 */
+
+@media (max-width: 700px) {
+
+  .exploration-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .exploration-back {
+    width: 100%;
+  }
+
+  .exploration-info {
+    grid-template-columns: 1fr;
+  }
+
+  .exploration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exploration-card {
+    min-height: 95px;
+  }
+
+}
