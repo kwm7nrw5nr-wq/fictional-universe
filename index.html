@@ -22,6 +22,98 @@
 
 <main>
 
+  <!-- 宇宙探索 -->
+  <section class="panel exploration-panel">
+
+    <h2>🚀 宇宙探索</h2>
+
+    <div class="exploration-header">
+
+      <div>
+
+        <div
+          class="exploration-location-title"
+          id="explorationTitle"
+        >
+          🌌 宇宙
+        </div>
+
+        <div
+          class="exploration-path"
+          id="explorationPath"
+        >
+          目前位置：宇宙
+        </div>
+
+      </div>
+
+      <button
+        id="explorationBack"
+        class="secondary exploration-back"
+        onclick="explorationBack()"
+        disabled
+      >
+        ← 返回上一層
+      </button>
+
+    </div>
+
+
+    <div class="exploration-info">
+
+      <div class="exploration-info-card">
+
+        <span>📍 當前位置</span>
+
+        <strong id="currentLocation">
+          宇宙
+        </strong>
+
+      </div>
+
+
+      <div class="exploration-info-card">
+
+        <span>🔭 探索狀態</span>
+
+        <strong id="explorationStatus">
+          等待探索
+        </strong>
+
+      </div>
+
+
+      <div class="exploration-info-card">
+
+        <span>✨ 已發現</span>
+
+        <strong id="discoveredCount">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="explorationGrid"
+      class="exploration-grid"
+    >
+      <!-- 探索項目由 JavaScript 自動生成 -->
+    </div>
+
+
+    <div
+      class="exploration-empty"
+      id="explorationEmpty"
+    >
+      尚未探索到這個區域。
+    </div>
+
+  </section>
+
+
   <!-- 世界事件 -->
   <section class="panel">
 
@@ -42,23 +134,66 @@
     <div class="stats">
 
       <div class="stat">
-        <div class="stat-title">世界時間</div>
-        <div class="stat-value" id="worldYear">—</div>
+
+        <div class="stat-title">
+          世界時間
+        </div>
+
+        <div
+          class="stat-value"
+          id="worldYear"
+        >
+          —
+        </div>
+
       </div>
 
-      <div class="stat">
-        <div class="stat-title">超星系團</div>
-        <div class="stat-value" id="superclusters">—</div>
-      </div>
 
       <div class="stat">
-        <div class="stat-title">星系</div>
-        <div class="stat-value" id="galaxies">—</div>
+
+        <div class="stat-title">
+          超星系團
+        </div>
+
+        <div
+          class="stat-value"
+          id="superclusters"
+        >
+          —
+        </div>
+
       </div>
 
+
       <div class="stat">
-        <div class="stat-title">文明</div>
-        <div class="stat-value" id="civilizations">—</div>
+
+        <div class="stat-title">
+          星系
+        </div>
+
+        <div
+          class="stat-value"
+          id="galaxies"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          文明
+        </div>
+
+        <div
+          class="stat-value"
+          id="civilizations"
+        >
+          —
+        </div>
+
       </div>
 
     </div>
@@ -71,26 +206,105 @@
 
     <h2>⚙️ 世界控制</h2>
 
-    <button onclick="startWorld()">▶️ 開始</button>
-    <button onclick="pauseWorld()" class="secondary">⏸️ 暫停</button>
-    <button onclick="resetWorld()" class="danger">🗑️ 重置世界</button>
+    <button onclick="startWorld()">
+      ▶️ 開始
+    </button>
+
+    <button
+      onclick="pauseWorld()"
+      class="secondary"
+    >
+      ⏸️ 暫停
+    </button>
+
+    <button
+      onclick="resetWorld()"
+      class="danger"
+    >
+      🗑️ 重置世界
+    </button>
+
 
     <h3>⏱️ 世界速度</h3>
 
     <div class="speed-buttons">
-      <button onclick="setSpeed(1)" class="secondary">×1</button>
-      <button onclick="setSpeed(2)" class="secondary">×2</button>
-      <button onclick="setSpeed(5)" class="secondary">×5</button>
-      <button onclick="setSpeed(10)" class="secondary">×10</button>
-      <button onclick="setSpeed(50)" class="secondary">×50</button>
-      <button onclick="setSpeed(100)" class="secondary">×100</button>
-      <button onclick="setSpeed(1000)" class="secondary">×1K</button>
-      <button onclick="setSpeed(10000)" class="secondary">×10K</button>
-      <button onclick="setSpeed(100000)" class="secondary">×100K</button>
-      <button onclick="setSpeed(1000000)" class="secondary">×1M</button>
+
+      <button
+        onclick="setSpeed(1)"
+        class="secondary"
+      >
+        ×1
+      </button>
+
+      <button
+        onclick="setSpeed(2)"
+        class="secondary"
+      >
+        ×2
+      </button>
+
+      <button
+        onclick="setSpeed(5)"
+        class="secondary"
+      >
+        ×5
+      </button>
+
+      <button
+        onclick="setSpeed(10)"
+        class="secondary"
+      >
+        ×10
+      </button>
+
+      <button
+        onclick="setSpeed(50)"
+        class="secondary"
+      >
+        ×50
+      </button>
+
+      <button
+        onclick="setSpeed(100)"
+        class="secondary"
+      >
+        ×100
+      </button>
+
+      <button
+        onclick="setSpeed(1000)"
+        class="secondary"
+      >
+        ×1K
+      </button>
+
+      <button
+        onclick="setSpeed(10000)"
+        class="secondary"
+      >
+        ×10K
+      </button>
+
+      <button
+        onclick="setSpeed(100000)"
+        class="secondary"
+      >
+        ×100K
+      </button>
+
+      <button
+        onclick="setSpeed(1000000)"
+        class="secondary"
+      >
+        ×1M
+      </button>
+
     </div>
 
-    <p id="worldStatus">世界尚未啟動。</p>
+
+    <p id="worldStatus">
+      世界尚未啟動。
+    </p>
 
   </section>
 
@@ -103,32 +317,47 @@
     <div class="info-grid">
 
       <div class="info-card">
+
         <strong>宇宙尺度</strong>
+
         <p>
           半徑：約 10³⁴ 光年<br>
           直徑：約 2 × 10³⁴ 光年
         </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>宇宙結構</strong>
+
         <p>
           宇宙 → 超星系團 → 星系團 → 星系 → 恆星系 → 行星
         </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>生命形式</strong>
+
         <p>
           碳基、矽基、機械、電子、外星／未知生命等
         </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>發展路線</strong>
+
         <p>
           科技、魔法、修仙、機械、資訊、生物科技、武道、混合及未知路線
         </p>
+
       </div>
 
     </div>
@@ -148,73 +377,96 @@
     <table class="level-table">
 
       <thead>
+
         <tr>
           <th>等級</th>
           <th>名稱</th>
           <th>核心特徵</th>
         </tr>
+
       </thead>
+
 
       <tbody>
 
         <tr>
           <td>Ⅰ</td>
           <td>初生文明</td>
-          <td>形成穩定社會、文化與技術，主要活動於單一行星局部。</td>
+          <td>
+            形成穩定社會、文化與技術，主要活動於單一行星局部。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅱ</td>
           <td>行星文明</td>
-          <td>基本掌握母星，形成全球性文明體系。</td>
+          <td>
+            基本掌握母星，形成全球性文明體系。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅲ</td>
           <td>星際文明</td>
-          <td>能穩定跨越恆星系，建立多星球與多恆星系文明網路。</td>
+          <td>
+            能穩定跨越恆星系，建立多星球與多恆星系文明網路。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅳ</td>
           <td>星系文明</td>
-          <td>能控制大量恆星系，形成大規模星系內交通與能源網路。</td>
+          <td>
+            能控制大量恆星系，形成大規模星系內交通與能源網路。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅴ</td>
           <td>超星系文明</td>
-          <td>能跨越多個星系，建立超大尺度文明疆域。</td>
+          <td>
+            能跨越多個星系，建立超大尺度文明疆域。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅵ</td>
           <td>星域文明</td>
-          <td>能控制龐大宇宙區域，具備成熟高階超凡體系。</td>
+          <td>
+            能控制龐大宇宙區域，具備成熟高階超凡體系。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅶ</td>
           <td>高等星域文明</td>
-          <td>能將高境界個體力量轉化為文明級能力。</td>
+          <td>
+            能將高境界個體力量轉化為文明級能力。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅷ</td>
           <td>宇宙級文明</td>
-          <td>能對宇宙尺度的時空、物質與能量進行大規模利用。</td>
+          <td>
+            能對宇宙尺度的時空、物質與能量進行大規模利用。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅸ</td>
           <td>宇宙巔峰文明</td>
-          <td>深度掌握宇宙法則，擁有大量頂尖超凡存在。</td>
+          <td>
+            深度掌握宇宙法則，擁有大量頂尖超凡存在。
+          </td>
         </tr>
 
         <tr>
           <td>Ⅹ</td>
           <td>至高文明</td>
-          <td>常規文明最高層級，對宇宙法則與高階力量具有極致掌控能力。</td>
+          <td>
+            常規文明最高層級，對宇宙法則與高階力量具有極致掌控能力。
+          </td>
         </tr>
 
       </tbody>
@@ -232,33 +484,68 @@
     <div class="info-grid">
 
       <div class="info-card">
+
         <strong>文明發展</strong>
-        <p>科技、魔法、修仙、機械、生物科技、資訊等發展程度。</p>
+
+        <p>
+          科技、魔法、修仙、機械、生物科技、資訊等發展程度。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>文明疆域</strong>
-        <p>文明實際能長期管理、利用與防衛的空間範圍。</p>
+
+        <p>
+          文明實際能長期管理、利用與防衛的空間範圍。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>超凡戰力</strong>
-        <p>最高境界、高境界個體數量、平均境界與集體運用能力。</p>
+
+        <p>
+          最高境界、高境界個體數量、平均境界與集體運用能力。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>令使體系</strong>
-        <p>令使數量、組織規模、所屬星神與對文明的影響。</p>
+
+        <p>
+          令使數量、組織規模、所屬星神與對文明的影響。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>星神關聯</strong>
-        <p>文明可以同時與多位星神建立不同程度的關係。</p>
+
+        <p>
+          文明可以同時與多位星神建立不同程度的關係。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>文明戰力</strong>
-        <p>獨立於文明等級，可高於或低於文明自身發展程度。</p>
+
+        <p>
+          獨立於文明等級，可高於或低於文明自身發展程度。
+        </p>
+
       </div>
 
     </div>
@@ -274,26 +561,50 @@
     <div class="info-grid">
 
       <div class="info-card">
+
         <strong>核心疆域</strong>
-        <p>文明高度控制、人口與基礎設施最密集的區域。</p>
+
+        <p>
+          文明高度控制、人口與基礎設施最密集的區域。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>有效疆域</strong>
-        <p>能長期穩定管理、利用與防衛的區域，是文明等級的重要參考。</p>
+
+        <p>
+          能長期穩定管理、利用與防衛的區域，是文明等級的重要參考。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>勢力範圍</strong>
-        <p>文明具有影響力，但沒有完整控制權的區域。</p>
+
+        <p>
+          文明具有影響力，但沒有完整控制權的區域。
+        </p>
+
       </div>
 
+
       <div class="info-card">
+
         <strong>宣稱疆域</strong>
-        <p>文明聲稱擁有，但實際控制能力不足的區域。</p>
+
+        <p>
+          文明聲稱擁有，但實際控制能力不足的區域。
+        </p>
+
       </div>
 
     </div>
+
 
     <p class="muted">
       文明疆域不必連續，也不一定呈現規則形狀。
@@ -316,13 +627,17 @@
     <table class="level-table">
 
       <thead>
+
         <tr>
           <th>境界</th>
           <th>冪次範圍</th>
         </tr>
+
       </thead>
 
+
       <tbody>
+
         <tr><td>凡塵</td><td>0～3</td></tr>
         <tr><td>靈境</td><td>3～6</td></tr>
         <tr><td>玄途</td><td>6～10</td></tr>
@@ -340,9 +655,11 @@
         <tr><td>造化</td><td>800～1200</td></tr>
         <tr><td>至尊</td><td>1200～1800</td></tr>
         <tr><td>主宰</td><td>1800+</td></tr>
+
       </tbody>
 
     </table>
+
 
     <p class="muted">
       神衍並非真正的神級；不朽才是神級起點。
@@ -362,8 +679,11 @@
       部分星神擁有神殿、聖域或固定基地。
     </p>
 
+
     <details>
+
       <summary>🌱 始源</summary>
+
       <div>
         <span class="tag">創世</span>
         <span class="tag">潮汐</span>
@@ -371,10 +691,14 @@
         <span class="tag">異骸</span>
         <span class="tag">森源</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>⚙️ 永衡</summary>
+
       <div>
         <span class="tag">永序</span>
         <span class="tag">機序</span>
@@ -384,10 +708,14 @@
         <span class="tag">求知</span>
         <span class="tag">界域</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>🌌 無界</summary>
+
       <div>
         <span class="tag">深淵</span>
         <span class="tag">虛構</span>
@@ -395,10 +723,14 @@
         <span class="tag">混沌</span>
         <span class="tag">夢境</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>🔥 極境</summary>
+
       <div>
         <span class="tag">焚耀</span>
         <span class="tag">燦爆</span>
@@ -406,43 +738,60 @@
         <span class="tag">劍道</span>
         <span class="tag">魔淵</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>☠️ 終歸</summary>
+
       <div>
         <span class="tag">腐朽</span>
         <span class="tag">空脹</span>
         <span class="tag">冥終</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>🩷 映心</summary>
+
       <div>
         <span class="tag">荊刺</span>
         <span class="tag">聖映</span>
         <span class="tag">情律</span>
         <span class="tag">聲律</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>⚫ 寂滅</summary>
+
       <div>
         <span class="tag">歸寂</span>
         <span class="tag">湮滅</span>
       </div>
+
     </details>
 
+
     <details>
+
       <summary>🌄 啟明</summary>
+
       <div>
         <span class="tag">星火</span>
         <span class="tag">曙願</span>
         <span class="tag">斷望</span>
         <span class="tag">天命</span>
       </div>
+
     </details>
 
   </section>
@@ -521,10 +870,12 @@
 
 
 <footer>
+
   <div>🌌 虛構世界</div>
   <div>版本名稱：星海初始</div>
   <div>版本號：v0.1.0</div>
   <div>更新日期：2026</div>
+
 </footer>
 
 
@@ -532,31 +883,64 @@
 
   const SAVE_KEY = "fictional_universe_save";
 
+
   let world = null;
   let timer = null;
   let running = false;
   let speed = 1;
 
 
+  /* ========================================
+     基本世界系統
+     ======================================== */
+
+
   function randomSeed() {
-    return Math.floor(Math.random() * 999999999);
+
+    return Math.floor(
+      Math.random() * 999999999
+    );
+
   }
 
 
   function createWorld() {
 
     return {
+
       year: 1,
 
       seed: randomSeed(),
 
-      superclusters: Math.floor(Math.random() * 8) + 3,
+      superclusters:
+        Math.floor(
+          Math.random() * 8
+        ) + 3,
 
-      galaxies: Math.floor(Math.random() * 90) + 30,
+      galaxies:
+        Math.floor(
+          Math.random() * 90
+        ) + 30,
 
-      civilizations: Math.floor(Math.random() * 12) + 3,
+      civilizations:
+        Math.floor(
+          Math.random() * 12
+        ) + 3,
 
-      events: []
+      events: [],
+
+      exploration: {
+
+        superclusters: [],
+
+        clusters: {},
+
+        galaxies: {},
+
+        discovered: 0
+
+      }
+
     };
 
   }
@@ -576,33 +960,113 @@
 
   function loadWorld() {
 
-    const saved = localStorage.getItem(SAVE_KEY);
+    const saved =
+      localStorage.getItem(
+        SAVE_KEY
+      );
+
 
     if (saved) {
 
       try {
 
-        world = JSON.parse(saved);
+        world =
+          JSON.parse(saved);
 
-        addEvent("世界存檔已載入。");
 
-      } catch {
+        /*
+         * 舊版本存檔相容
+         */
 
-        world = createWorld();
+        if (!world.exploration) {
 
-        addEvent("存檔損壞，已建立新世界。");
+          world.exploration = {
+
+            superclusters: [],
+
+            clusters: {},
+
+            galaxies: {},
+
+            discovered: 0
+
+          };
+
+        }
+
+
+        if (
+          !Array.isArray(
+            world.exploration.superclusters
+          )
+        ) {
+
+          world.exploration.superclusters = [];
+
+        }
+
+
+        if (
+          !world.exploration.clusters
+        ) {
+
+          world.exploration.clusters = {};
+
+        }
+
+
+        if (
+          !world.exploration.galaxies
+        ) {
+
+          world.exploration.galaxies = {};
+
+        }
+
+
+        if (
+          typeof
+          world.exploration.discovered
+          !== "number"
+        ) {
+
+          world.exploration.discovered = 0;
+
+        }
+
+
+        addEvent(
+          "世界存檔已載入。"
+        );
 
       }
 
-    } else {
+      catch {
 
-      world = createWorld();
+        world =
+          createWorld();
 
-      addEvent("新的宇宙已生成。");
+        addEvent(
+          "存檔損壞，已建立新世界。"
+        );
+
+      }
+
+    }
+
+    else {
+
+      world =
+        createWorld();
+
+      addEvent(
+        "新的宇宙已生成。"
+      );
 
       saveWorld();
 
     }
+
 
     updateDisplay();
 
@@ -613,19 +1077,36 @@
 
     if (!world) return;
 
-    document.getElementById("worldYear").textContent =
-      "第 " + world.year + " 年";
 
-    document.getElementById("superclusters").textContent =
+    document.getElementById(
+      "worldYear"
+    ).textContent =
+      "第 " +
+      world.year +
+      " 年";
+
+
+    document.getElementById(
+      "superclusters"
+    ).textContent =
       world.superclusters;
 
-    document.getElementById("galaxies").textContent =
+
+    document.getElementById(
+      "galaxies"
+    ).textContent =
       world.galaxies;
 
-    document.getElementById("civilizations").textContent =
+
+    document.getElementById(
+      "civilizations"
+    ).textContent =
       world.civilizations;
 
-    document.getElementById("worldSeed").textContent =
+
+    document.getElementById(
+      "worldSeed"
+    ).textContent =
       world.seed;
 
   }
@@ -635,19 +1116,44 @@
 
     if (!world) return;
 
+
     world.events.unshift(
-      "第 " + world.year + " 年： " + text
+
+      "第 " +
+      world.year +
+      " 年： " +
+      text
+
     );
 
-    if (world.events.length > 50) {
+
+    if (
+      world.events.length > 50
+    ) {
+
       world.events.pop();
+
     }
 
-    const log = document.getElementById("eventLog");
 
-    log.innerHTML = world.events
-      .map(event => `<div class="event">${event}</div>`)
-      .join("");
+    const log =
+      document.getElementById(
+        "eventLog"
+      );
+
+
+    if (!log) return;
+
+
+    log.innerHTML =
+      world.events
+
+        .map(
+          event =>
+            `<div class="event">${event}</div>`
+        )
+
+        .join("");
 
   }
 
@@ -656,30 +1162,61 @@
 
     if (!world) return;
 
-    for (let i = 0; i < years; i++) {
+
+    for (
+      let i = 0;
+      i < years;
+      i++
+    ) {
 
       world.year += 1;
 
-      if (Math.random() < 0.08) {
-        world.civilizations += 1;
-        addEvent("一個新的文明開始形成。");
-      }
 
       if (
-        world.civilizations > 1 &&
-        Math.random() < 0.04
+        Math.random() < 0.08
       ) {
-        world.civilizations -= 1;
-        addEvent("一個文明消失了。");
+
+        world.civilizations += 1;
+
+        addEvent(
+          "一個新的文明開始形成。"
+        );
+
       }
 
-      if (Math.random() < 0.03) {
-        addEvent("宇宙中發生了一次未知事件。");
+
+      if (
+
+        world.civilizations > 1 &&
+
+        Math.random() < 0.04
+
+      ) {
+
+        world.civilizations -= 1;
+
+        addEvent(
+          "一個文明消失了。"
+        );
+
+      }
+
+
+      if (
+        Math.random() < 0.03
+      ) {
+
+        addEvent(
+          "宇宙中發生了一次未知事件。"
+        );
+
       }
 
     }
 
+
     saveWorld();
+
     updateDisplay();
 
   }
@@ -689,10 +1226,15 @@
 
     if (running) return;
 
+
     running = true;
 
-    document.getElementById("worldStatus").textContent =
+
+    document.getElementById(
+      "worldStatus"
+    ).textContent =
       "世界正在運轉……";
+
 
     runTimer();
 
@@ -703,9 +1245,13 @@
 
     running = false;
 
+
     clearTimeout(timer);
 
-    document.getElementById("worldStatus").textContent =
+
+    document.getElementById(
+      "worldStatus"
+    ).textContent =
       "世界已暫停。";
 
   }
@@ -715,55 +1261,1120 @@
 
     if (!running) return;
 
-    let yearsToSimulate = speed;
 
-    simulateYears(yearsToSimulate);
+    const yearsToSimulate =
+      speed;
 
-    timer = setTimeout(
-      runTimer,
-      1000
+
+    simulateYears(
+      yearsToSimulate
     );
+
+
+    timer =
+      setTimeout(
+        runTimer,
+        1000
+      );
 
   }
 
 
   function setSpeed(newSpeed) {
 
-    speed = newSpeed;
+    speed =
+      newSpeed;
 
-    document.getElementById("worldStatus").textContent =
-      "世界運轉速度：×" + speed.toLocaleString();
+
+    document.getElementById(
+      "worldStatus"
+    ).textContent =
+      "世界運轉速度：×" +
+      speed.toLocaleString();
 
   }
 
 
-  function resetWorld() {
+  /* ========================================
+     宇宙探索系統
+     ======================================== */
 
-    const confirmed = confirm(
-      "確定要刪除目前世界並生成全新的宇宙嗎？\n\n目前的世界資料將會消失。"
+
+  let explorationStack = [
+
+    {
+
+      type: "universe",
+
+      name: "宇宙",
+
+      id: "universe"
+
+    }
+
+  ];
+
+
+  let explorationData = {
+
+    superclusters: [],
+
+    clusters: {},
+
+    galaxies: {},
+
+    discovered: 0
+
+  };
+
+
+  function createExplorationName(
+    type,
+    index
+  ) {
+
+    const names = {
+
+      supercluster: [
+
+        "曙光超星系團",
+        "永恆超星系團",
+        "深藍超星系團",
+        "赤曜超星系團",
+        "寂靜超星系團",
+        "星環超星系團",
+        "遠古超星系團",
+        "無垠超星系團"
+
+      ],
+
+
+      cluster: [
+
+        "晨星星系團",
+        "天穹星系團",
+        "銀河星系團",
+        "霜原星系團",
+        "深空星系團",
+        "赤潮星系團",
+        "幽影星系團",
+        "星門星系團"
+
+      ],
+
+
+      galaxy: [
+
+        "曙光星系",
+        "銀霧星系",
+        "天穹星系",
+        "燦星星系",
+        "深淵星系",
+        "永序星系",
+        "夜幕星系",
+        "星火星系"
+
+      ]
+
+    };
+
+
+    const list =
+      names[type] || [];
+
+
+    if (
+      list[index]
+    ) {
+
+      return list[index];
+
+    }
+
+
+    return (
+
+      list[
+        index % list.length
+      ]
+
+      +
+
+      " · "
+
+      +
+
+      (
+        Math.floor(
+          index / list.length
+        ) + 1
+      )
+
     );
 
-    if (!confirmed) return;
+  }
 
-    pauseWorld();
 
-    localStorage.removeItem(SAVE_KEY);
+  function randomGalaxyCount() {
 
-    world = createWorld();
+    return (
 
-    addEvent("全新的宇宙誕生了。");
+      Math.floor(
+        Math.random() * 80
+      ) + 20
+
+    );
+
+  }
+
+
+  function randomClusterCount() {
+
+    return (
+
+      Math.floor(
+        Math.random() * 12
+      ) + 4
+
+    );
+
+  }
+
+
+  function initializeExploration() {
+
+    if (!world) return;
+
+
+    if (!world.exploration) {
+
+      world.exploration = {
+
+        superclusters: [],
+
+        clusters: {},
+
+        galaxies: {},
+
+        discovered: 0
+
+      };
+
+    }
+
+
+    explorationData =
+      world.exploration;
+
+
+    /*
+     * 第一次進入宇宙時生成超星系團。
+     */
+
+    if (
+      explorationData
+        .superclusters
+        .length === 0
+    ) {
+
+
+      for (
+
+        let i = 0;
+
+        i < world.superclusters;
+
+        i++
+
+      ) {
+
+        explorationData
+          .superclusters
+          .push({
+
+            id:
+              "sc_" + i,
+
+            name:
+              createExplorationName(
+                "supercluster",
+                i
+              ),
+
+            clusters:
+              randomClusterCount(),
+
+            discovered:
+              false
+
+          });
+
+      }
+
+    }
+
 
     saveWorld();
 
+
+    renderExploration();
+
+  }
+
+
+  function renderExploration() {
+
+    const grid =
+      document.getElementById(
+        "explorationGrid"
+      );
+
+
+    const title =
+      document.getElementById(
+        "explorationTitle"
+      );
+
+
+    const path =
+      document.getElementById(
+        "explorationPath"
+      );
+
+
+    const location =
+      document.getElementById(
+        "currentLocation"
+      );
+
+
+    const status =
+      document.getElementById(
+        "explorationStatus"
+      );
+
+
+    const back =
+      document.getElementById(
+        "explorationBack"
+      );
+
+
+    const empty =
+      document.getElementById(
+        "explorationEmpty"
+      );
+
+
+    if (!grid) return;
+
+
+    grid.innerHTML = "";
+
+
+    empty.style.display =
+      "none";
+
+
+    const current =
+      explorationStack[
+        explorationStack.length - 1
+      ];
+
+
+    title.textContent =
+
+      getExplorationIcon(
+        current.type
+      )
+
+      +
+
+      " "
+
+      +
+
+      current.name;
+
+
+    location.textContent =
+      current.name;
+
+
+    path.textContent =
+      "目前位置：" +
+
+      explorationStack
+
+        .map(
+          item =>
+            item.name
+        )
+
+        .join(" → ");
+
+
+    back.disabled =
+      explorationStack.length <= 1;
+
+
+    if (
+      current.type === "universe"
+    ) {
+
+      status.textContent =
+        "探索宇宙";
+
+
+      renderSuperclusters(
+        grid
+      );
+
+    }
+
+
+    else if (
+      current.type ===
+      "supercluster"
+    ) {
+
+      status.textContent =
+        "探索超星系團";
+
+
+      renderClusters(
+        grid,
+        current.id
+      );
+
+    }
+
+
+    else if (
+      current.type ===
+      "cluster"
+    ) {
+
+      status.textContent =
+        "探索星系團";
+
+
+      renderGalaxies(
+        grid,
+        current.id
+      );
+
+    }
+
+
+    else if (
+      current.type ===
+      "galaxy"
+    ) {
+
+      status.textContent =
+        "探索星系";
+
+
+      renderGalaxyPlaceholder(
+        grid,
+        current
+      );
+
+    }
+
+
+    updateDiscoveredCount();
+
+  }
+
+
+  function getExplorationIcon(
+    type
+  ) {
+
+    if (
+      type === "universe"
+    ) {
+
+      return "🌌";
+
+    }
+
+
+    if (
+      type === "supercluster"
+    ) {
+
+      return "✨";
+
+    }
+
+
+    if (
+      type === "cluster"
+    ) {
+
+      return "🌠";
+
+    }
+
+
+    if (
+      type === "galaxy"
+    ) {
+
+      return "🌀";
+
+    }
+
+
+    return "📍";
+
+  }
+
+
+  function renderSuperclusters(
+    grid
+  ) {
+
+    explorationData
+      .superclusters
+      .forEach(
+        item => {
+
+          const card =
+            createExplorationCard(
+
+              "✨",
+
+              item.name,
+
+              "超星系團",
+
+              "包含約 " +
+              item.clusters +
+              " 個星系團",
+
+              function () {
+
+                item.discovered =
+                  true;
+
+
+                explorationStack
+                  .push({
+
+                    type:
+                      "supercluster",
+
+                    name:
+                      item.name,
+
+                    id:
+                      item.id
+
+                  });
+
+
+                explorationData
+                  .discovered++;
+
+
+                saveWorld();
+
+
+                renderExploration();
+
+              }
+
+            );
+
+
+          grid.appendChild(
+            card
+          );
+
+        }
+      );
+
+  }
+
+
+  function renderClusters(
+    grid,
+    superclusterId
+  ) {
+
+    const supercluster =
+      explorationData
+        .superclusters
+        .find(
+          item =>
+            item.id ===
+            superclusterId
+        );
+
+
+    if (
+      !supercluster
+    ) return;
+
+
+    if (
+      !explorationData
+        .clusters[
+          superclusterId
+        ]
+    ) {
+
+      explorationData
+        .clusters[
+          superclusterId
+        ] = [];
+
+
+      for (
+
+        let i = 0;
+
+        i < supercluster.clusters;
+
+        i++
+
+      ) {
+
+        explorationData
+          .clusters[
+            superclusterId
+          ]
+          .push({
+
+            id:
+
+              superclusterId +
+
+              "_c_" +
+
+              i,
+
+
+            name:
+
+              createExplorationName(
+                "cluster",
+                i
+              ),
+
+
+            galaxies:
+              randomGalaxyCount(),
+
+
+            discovered:
+              false
+
+          });
+
+      }
+
+
+      saveWorld();
+
+    }
+
+
+    explorationData
+      .clusters[
+        superclusterId
+      ]
+      .forEach(
+        item => {
+
+          const card =
+            createExplorationCard(
+
+              "🌠",
+
+              item.name,
+
+              "星系團",
+
+              "包含約 " +
+              item.galaxies +
+              " 個星系",
+
+              function () {
+
+                item.discovered =
+                  true;
+
+
+                explorationStack
+                  .push({
+
+                    type:
+                      "cluster",
+
+                    name:
+                      item.name,
+
+                    id:
+                      item.id
+
+                  });
+
+
+                explorationData
+                  .discovered++;
+
+
+                saveWorld();
+
+
+                renderExploration();
+
+              }
+
+            );
+
+
+          grid.appendChild(
+            card
+          );
+
+        }
+      );
+
+  }
+
+
+  function renderGalaxies(
+    grid,
+    clusterId
+  ) {
+
+    let cluster = null;
+
+
+    for (
+      const key in
+      explorationData.clusters
+    ) {
+
+      const found =
+        explorationData
+          .clusters[key]
+          .find(
+            item =>
+              item.id ===
+              clusterId
+          );
+
+
+      if (found) {
+
+        cluster =
+          found;
+
+        break;
+
+      }
+
+    }
+
+
+    if (!cluster) return;
+
+
+    if (
+      !explorationData
+        .galaxies[
+          clusterId
+        ]
+    ) {
+
+      explorationData
+        .galaxies[
+          clusterId
+        ] = [];
+
+
+      for (
+
+        let i = 0;
+
+        i < cluster.galaxies;
+
+        i++
+
+      ) {
+
+        explorationData
+          .galaxies[
+            clusterId
+          ]
+          .push({
+
+            id:
+
+              clusterId +
+
+              "_g_" +
+
+              i,
+
+
+            name:
+
+              createExplorationName(
+                "galaxy",
+                i
+              ),
+
+
+            starSystems:
+
+              Math.floor(
+                Math.random() * 500
+              ) + 100,
+
+
+            discovered:
+              false
+
+          });
+
+      }
+
+
+      saveWorld();
+
+    }
+
+
+    explorationData
+      .galaxies[
+        clusterId
+      ]
+      .forEach(
+        item => {
+
+          const card =
+            createExplorationCard(
+
+              "🌀",
+
+              item.name,
+
+              "星系",
+
+              "恆星系：約 " +
+              item.starSystems +
+              " 個",
+
+              function () {
+
+                item.discovered =
+                  true;
+
+
+                explorationStack
+                  .push({
+
+                    type:
+                      "galaxy",
+
+                    name:
+                      item.name,
+
+                    id:
+                      item.id
+
+                  });
+
+
+                explorationData
+                  .discovered++;
+
+
+                saveWorld();
+
+
+                renderExploration();
+
+              }
+
+            );
+
+
+          grid.appendChild(
+            card
+          );
+
+        }
+      );
+
+  }
+
+
+  function renderGalaxyPlaceholder(
+    grid,
+    galaxy
+  ) {
+
+    const card =
+      createExplorationCard(
+
+        "⭐",
+
+        "進入星系",
+
+        galaxy.name,
+
+        "下一階段：恆星系探索",
+
+        function () {
+
+          alert(
+
+            "🚧 恆星系探索正在建造中。\n\n" +
+
+            "下一階段將可以探索：\n" +
+
+            "恆星 → 行星 → 衛星 → 文明 → 遺跡 → 神殿"
+
+          );
+
+        }
+
+      );
+
+
+    grid.appendChild(
+      card
+    );
+
+
+    const notice =
+      document.createElement(
+        "div"
+      );
+
+
+    notice.className =
+      "exploration-notice";
+
+
+    notice.innerHTML =
+
+      "🔭 你已抵達「" +
+
+      galaxy.name +
+
+      "」。<br>" +
+
+      "這裡將成為下一階段的星系探索入口。";
+
+
+    grid.appendChild(
+      notice
+    );
+
+  }
+
+
+  function createExplorationCard(
+    icon,
+    name,
+    type,
+    description,
+    action
+  ) {
+
+    const card =
+      document.createElement(
+        "button"
+      );
+
+
+    card.className =
+      "exploration-card";
+
+
+    card.type =
+      "button";
+
+
+    card.innerHTML =
+
+      '<div class="exploration-icon">' +
+
+      icon +
+
+      '</div>' +
+
+
+      '<div class="exploration-card-content">' +
+
+      '<div class="exploration-card-name">' +
+
+      name +
+
+      '</div>' +
+
+
+      '<div class="exploration-card-type">' +
+
+      type +
+
+      '</div>' +
+
+
+      '<div class="exploration-card-description">' +
+
+      description +
+
+      '</div>' +
+
+
+      '</div>' +
+
+
+      '<div class="exploration-arrow">›</div>';
+
+
+    card.addEventListener(
+      "click",
+      action
+    );
+
+
+    return card;
+
+  }
+
+
+  function explorationBack() {
+
+    if (
+      explorationStack.length <= 1
+    ) {
+
+      return;
+
+    }
+
+
+    explorationStack.pop();
+
+
+    renderExploration();
+
+  }
+
+
+  function updateDiscoveredCount() {
+
+    const element =
+      document.getElementById(
+        "discoveredCount"
+      );
+
+
+    if (!element) return;
+
+
+    element.textContent =
+      explorationData.discovered || 0;
+
+  }
+
+
+  /* ========================================
+     重置世界
+     ======================================== */
+
+
+  function resetWorld() {
+
+    const confirmed =
+      confirm(
+
+        "確定要刪除目前世界並生成全新的宇宙嗎？\n\n" +
+
+        "目前的世界資料將會消失。"
+
+      );
+
+
+    if (!confirmed) return;
+
+
+    pauseWorld();
+
+
+    localStorage.removeItem(
+      SAVE_KEY
+    );
+
+
+    world =
+      createWorld();
+
+
+    explorationStack = [
+
+      {
+
+        type:
+          "universe",
+
+        name:
+          "宇宙",
+
+        id:
+          "universe"
+
+      }
+
+    ];
+
+
+    explorationData =
+      world.exploration;
+
+
+    addEvent(
+      "全新的宇宙誕生了。"
+    );
+
+
+    saveWorld();
+
+
     updateDisplay();
 
-    document.getElementById("worldStatus").textContent =
+
+    renderExploration();
+
+
+    document.getElementById(
+      "worldStatus"
+    ).textContent =
       "新的世界已建立。";
 
   }
 
 
+  /* ========================================
+     啟動
+     ======================================== */
+
+
   loadWorld();
+
+  initializeExploration();
 
 </script>
 
