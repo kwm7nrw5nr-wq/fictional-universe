@@ -1871,6 +1871,87 @@ function getGalaxy(
 
 }
 
+  /* ==================================================
+   宇宙星系總量
+   ================================================== */
+
+function getUniverseGalaxyCount(seed) {
+
+  let totalGalaxies = 0;
+
+  /*
+   * 世界的超星系團數量
+   */
+  const superclusterCount =
+    seededInteger(
+      seed,
+      "universe-supercluster-count",
+      50,
+      5000
+    );
+
+
+  /*
+   * 逐個計算超星系團內的星系團，
+   * 再計算每個星系團內的星系數量。
+   *
+   * 只計算數字，不建立實際物件。
+   */
+
+  for (
+    let superclusterIndex = 0;
+    superclusterIndex < superclusterCount;
+    superclusterIndex++
+  ) {
+
+    const superclusterId =
+      "sc_" +
+      superclusterIndex;
+
+
+    const clusterCount =
+      seededInteger(
+        seed,
+        superclusterId + "-cluster-count",
+        30,
+        500
+      );
+
+
+    for (
+      let clusterIndex = 0;
+      clusterIndex < clusterCount;
+      clusterIndex++
+    ) {
+
+      const clusterId =
+        "sc_" +
+        superclusterIndex +
+        "_c_" +
+        clusterIndex;
+
+
+      const galaxyCount =
+        seededInteger(
+          seed,
+          clusterId + "-galaxy-count",
+          20,
+          300
+        );
+
+
+      totalGalaxies +=
+        galaxyCount;
+
+    }
+
+  }
+
+
+  return totalGalaxies;
+
+}
+
 
 /* ==================================================
    已發現系統
