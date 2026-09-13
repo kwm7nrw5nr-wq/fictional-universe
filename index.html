@@ -1194,87 +1194,264 @@ function simulateYears(years) {
 
   if (!world) return;
 
-
   /*
-   * ×1M 仍然保留。
+   * ================================================
+   * 批次宇宙模擬
+   * ================================================
    *
-   * 這裡不處理宇宙全部天體，
-   * 所以不會因為宇宙結構而大量增加運算。
+   * 不逐年執行，避免 ×1M 造成大量迴圈。
+   *
+   * years = 這一次宇宙實際經過的年份
    */
 
-  world.year += years;
+
+  const elapsedYears =
+    Math.max(
+      0,
+      Math.floor(years)
+    );
+
+
+  if (elapsedYears <= 0) {
+    return;
+  }
 
 
   /*
-   * 事件以機率方式處理。
-   *
-   * 不是逐年跑一百萬次。
+   * ================================================
+   * 1. 推進宇宙時間
+   * ================================================
    */
 
-  const civilizationEvents =
+  world.year += elapsedYears;
+
+
+  /*
+   * ================================================
+   * 2. 文明演化
+   * ================================================
+   *
+   * 每 100 年作為一個文明演化週期。
+   *
+   * 不是真的執行：
+   *
+   * 100 年 → 1 次
+   * 1,000,000 年 → 10,000 次
+   *
+   * 而是直接用機率計算整段時間的結果。
+   */
+
+  const civilizationCycles =
+    elapsedYears / 100;
+
+
+  /*
+   * 新文明形成率
+   *
+   * 平均每 100 年有 8% 的機會
+   * 形成一個新文明。
+   */
+
+  const expectedBirths =
+    civilizationCycles * 0.08;
+
+
+  /*
+   * 文明消失率
+   *
+   * 平均每 100 年有 4% 的機會
+   * 發生一次文明消亡。
+   */
+
+  const expectedDeaths =
+    civilizationCycles * 0.04;
+
+
+  /*
+   * 使用 Poisson 式批次抽樣。
+   *
+   * 這樣不需要真的執行幾千、幾萬甚至
+   * 幾百萬次迴圈。
+   */
+
+  function randomPoisson(lambda) {
+
+    if (lambda <= 0) {
+      return 0;
+    }
+
+
+    /*
+     * lambda 很大時，
+     * 使用常態近似避免大量迴圈。
+     */
+
+    if (lambda > 30) {
+
+      const u1 =
+        Math.max(
+          Math.random(),
+          Number.EPSILON
+        );
+
+      const u2 =
+        Math.random();
+
+      const z =
+        Math.sqrt(
+          -2 *
+          Math.log(u1)
+        ) *
+        Math.cos(
+          2 *
+          Math.PI *
+          u2
+        );
+
+      return Math.max(
+        0,
+        Math.round(
+          lambda +
+          Math.sqrt(lambda) * z
+        )
+      );
+
+    }
+
+
+    /*
+     * lambda 較小時使用
+     * Knuth Poisson sampling。
+     */
+
+    const limit =
+      Math.exp(-lambda);
+
+    let product = 1;
+    let count = 0;
+
+    do {
+
+      count++;
+
+      product *=
+        Math.random();
+
+    } while (
+      product > limit
+    );
+
+    return count - 1;
+  }
+
+
+  /*
+   * 計算這段時間實際形成多少文明。
+   */
+
+  const births =
+    randomPoisson(
+      expectedBirths
+    );
+
+
+  /*
+   * 計算這段時間實際消失多少文明。
+   */
+
+  const deaths =
+    randomPoisson(
+      expectedDeaths
+    );
+
+
+  /*
+   * 更新文明數量。
+   */
+
+  world.civilizations =
     Math.max(
       1,
-      Math.floor(
-        years / 100
+      world.civilizations +
+      births -
+      Math.min(
+        deaths,
+        Math.max(
+          0,
+          world.civilizations +
+          births -
+          1
+        )
       )
+    );
+
+
+  /*
+   * ================================================
+   * 3. 宇宙事件
+   * ================================================
+   *
+   * 每 100 年平均有 3% 的機會
+   * 發生一次大型未知事件。
+   */
+
+  const eventLambda =
+    civilizationCycles * 0.03;
+
+
+  const eventCount =
+    randomPoisson(
+      eventLambda
+    );
+
+
+  /*
+   * 不把幾千、幾萬個事件全部塞進畫面。
+   *
+   * 只顯示最多 5 個代表事件。
+   */
+
+  const displayedEvents =
+    Math.min(
+      eventCount,
+      5
     );
 
 
   for (
     let i = 0;
-    i < Math.min(
-      civilizationEvents,
-      20
-    );
+    i < displayedEvents;
     i++
   ) {
 
-    const random =
-      Math.random();
-
-
-    if (
-      random < 0.08
-    ) {
-
-      world.civilizations += 1;
-
-      addEvent(
-        "一個新的文明開始形成。"
-      );
-
-    }
-
-
-    else if (
-
-      random < 0.12 &&
-
-      world.civilizations > 1
-
-    ) {
-
-      world.civilizations -= 1;
-
-      addEvent(
-        "一個文明消失了。"
-      );
-
-    }
-
-
-    else if (
-      random < 0.15
-    ) {
-
-      addEvent(
-        "宇宙中發生了一次未知事件。"
-      );
-
-    }
+    addEvent(
+      "宇宙中發生了一次未知事件。"
+    );
 
   }
 
+
+  /*
+   * 如果實際發生的事件很多，
+   * 額外告訴玩家這是一批事件。
+   */
+
+  if (
+    eventCount > displayedEvents
+  ) {
+
+    addEvent(
+      `在這段時間內，宇宙還發生了 ${eventCount - displayedEvents} 次其他事件。`
+    );
+
+  }
+
+
+  /*
+   * ================================================
+   * 4. 儲存與畫面更新
+   * ================================================
+   */
 
   saveWorld();
 
