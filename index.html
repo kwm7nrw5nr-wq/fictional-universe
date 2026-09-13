@@ -5,279 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>虛構世界</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #080b12;
-      color: #e8ecf5;
-      line-height: 1.7;
-    }
-
-    header {
-      padding: 28px 20px;
-      text-align: center;
-      background: #0d111c;
-      border-bottom: 1px solid #202638;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
-
-    header p {
-      margin: 8px 0 0;
-      color: #8993a8;
-    }
-
-    .navbar {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
-  flex-wrap: wrap;
-}
-
-.navbar a {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 10px;
-  background: #181f31;
-  border: 1px solid #2a3348;
-  color: #dce3f2;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-.navbar a:hover {
-  background: #252e46;
-  border-color: #5865f2;
-}
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 25px 20px;
-    }
-
-    .panel {
-      background: #101522;
-      border: 1px solid #252c3e;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 18px;
-    }
-
-    .panel h2 {
-      margin-top: 0;
-    }
-
-    .panel h3 {
-      margin-bottom: 8px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .stat {
-      background: #0d121e;
-      border: 1px solid #252c3e;
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .stat-title {
-      color: #8993a8;
-      font-size: 14px;
-    }
-
-    .stat-value {
-      margin-top: 6px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    button {
-      padding: 11px 16px;
-      margin: 5px;
-      border: 0;
-      border-radius: 10px;
-      background: #5865f2;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.88;
-    }
-
-    button.danger {
-      background: #a83f4f;
-    }
-
-    button.secondary {
-      background: #30384d;
-    }
-    .speed-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.speed-buttons button {
-  margin: 0;
-  min-width: 72px;
-}
-
-    #eventLog {
-      max-height: 220px;
-      overflow-y: auto;
-      margin-top: 15px;
-      padding: 12px;
-      background: #090d15;
-      border-radius: 10px;
-      color: #aeb7c9;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .event {
-      border-bottom: 1px solid #1b2130;
-      padding: 5px 0;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .info-card {
-      background: #0d121e;
-      border: 1px solid #252c3e;
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .info-card strong {
-      color: #ffffff;
-    }
-
-    details {
-      background: #0d121e;
-      border: 1px solid #252c3e;
-      border-radius: 12px;
-      margin: 10px 0;
-      overflow: hidden;
-    }
-
-    summary {
-      padding: 14px 16px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    details > div {
-      padding: 0 16px 16px;
-    }
-
-    .god-card {
-      margin-bottom: 12px;
-      padding: 14px;
-      background: #0d121e;
-      border: 1px solid #252c3e;
-      border-radius: 12px;
-    }
-
-    .god-name {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .muted {
-      color: #8993a8;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 3px 8px;
-      margin: 3px 4px 3px 0;
-      border-radius: 8px;
-      background: #252c3e;
-      color: #cbd3e4;
-      font-size: 13px;
-    }
-
-    .level-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-    }
-
-    .level-table th,
-    .level-table td {
-      padding: 9px;
-      border-bottom: 1px solid #252c3e;
-      text-align: left;
-    }
-
-    .level-table th {
-      color: #aeb7c9;
-    }
-
-    footer {
-      text-align: center;
-      color: #626c80;
-      padding: 25px 15px 40px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 700px) {
-      header h1 {
-        font-size: 26px;
-      }
-
-      main {
-        padding: 16px 12px;
-      }
-
-      .panel {
-        padding: 18px;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      button {
-        width: calc(50% - 14px);
-      }
-
-      .level-table {
-        font-size: 13px;
-      }
-
-      .level-table th,
-      .level-table td {
-        padding: 7px 5px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -291,8 +19,10 @@
     <a href="gods.html">✨ 星神</a>
   </nav>
 </header>
+
 <main>
-<!-- 世界事件 -->
+
+  <!-- 世界事件 -->
   <section class="panel">
 
     <h2>📜 世界事件</h2>
@@ -303,9 +33,10 @@
 
   </section>
 
-  
+
   <!-- 世界狀態 -->
   <section class="panel">
+
     <h2>🌌 世界狀態</h2>
 
     <div class="stats">
@@ -331,35 +62,37 @@
       </div>
 
     </div>
+
   </section>
 
 
+  <!-- 世界控制 -->
   <section class="panel">
 
-  <h2>⚙️ 世界控制</h2>
+    <h2>⚙️ 世界控制</h2>
 
-  <button onclick="startWorld()">▶️ 開始</button>
-  <button onclick="pauseWorld()" class="secondary">⏸️ 暫停</button>
-  <button onclick="resetWorld()" class="danger">🗑️ 重置世界</button>
+    <button onclick="startWorld()">▶️ 開始</button>
+    <button onclick="pauseWorld()" class="secondary">⏸️ 暫停</button>
+    <button onclick="resetWorld()" class="danger">🗑️ 重置世界</button>
 
-  <h3>⏱️ 世界速度</h3>
+    <h3>⏱️ 世界速度</h3>
 
-  <div class="speed-buttons">
-    <button onclick="setSpeed(1)" class="secondary">×1</button>
-    <button onclick="setSpeed(2)" class="secondary">×2</button>
-    <button onclick="setSpeed(5)" class="secondary">×5</button>
-    <button onclick="setSpeed(10)" class="secondary">×10</button>
-    <button onclick="setSpeed(50)" class="secondary">×50</button>
-    <button onclick="setSpeed(100)" class="secondary">×100</button>
-    <button onclick="setSpeed(1000)" class="secondary">×1K</button>
-    <button onclick="setSpeed(10000)" class="secondary">×10K</button>
-    <button onclick="setSpeed(100000)" class="secondary">×100K</button>
-    <button onclick="setSpeed(1000000)" class="secondary">×1M</button>
-  </div>
+    <div class="speed-buttons">
+      <button onclick="setSpeed(1)" class="secondary">×1</button>
+      <button onclick="setSpeed(2)" class="secondary">×2</button>
+      <button onclick="setSpeed(5)" class="secondary">×5</button>
+      <button onclick="setSpeed(10)" class="secondary">×10</button>
+      <button onclick="setSpeed(50)" class="secondary">×50</button>
+      <button onclick="setSpeed(100)" class="secondary">×100</button>
+      <button onclick="setSpeed(1000)" class="secondary">×1K</button>
+      <button onclick="setSpeed(10000)" class="secondary">×10K</button>
+      <button onclick="setSpeed(100000)" class="secondary">×100K</button>
+      <button onclick="setSpeed(1000000)" class="secondary">×1M</button>
+    </div>
 
-  <p id="worldStatus">世界尚未啟動。</p>
+    <p id="worldStatus">世界尚未啟動。</p>
 
-</section>
+  </section>
 
 
   <!-- 宇宙基本設定 -->
@@ -919,37 +652,37 @@
   }
 
 
-function simulateYears(years) {
+  function simulateYears(years) {
 
-  if (!world) return;
+    if (!world) return;
 
-  for (let i = 0; i < years; i++) {
+    for (let i = 0; i < years; i++) {
 
-    world.year += 1;
+      world.year += 1;
 
-    if (Math.random() < 0.08) {
-      world.civilizations += 1;
-      addEvent("一個新的文明開始形成。");
+      if (Math.random() < 0.08) {
+        world.civilizations += 1;
+        addEvent("一個新的文明開始形成。");
+      }
+
+      if (
+        world.civilizations > 1 &&
+        Math.random() < 0.04
+      ) {
+        world.civilizations -= 1;
+        addEvent("一個文明消失了。");
+      }
+
+      if (Math.random() < 0.03) {
+        addEvent("宇宙中發生了一次未知事件。");
+      }
+
     }
 
-    if (
-      world.civilizations > 1 &&
-      Math.random() < 0.04
-    ) {
-      world.civilizations -= 1;
-      addEvent("一個文明消失了。");
-    }
-
-    if (Math.random() < 0.03) {
-      addEvent("宇宙中發生了一次未知事件。");
-    }
+    saveWorld();
+    updateDisplay();
 
   }
-
-  saveWorld();
-  updateDisplay();
-
-}
 
 
   function startWorld() {
@@ -978,30 +711,30 @@ function simulateYears(years) {
   }
 
 
- function runTimer() {
+  function runTimer() {
 
-  if (!running) return;
+    if (!running) return;
 
-  let yearsToSimulate = speed;
+    let yearsToSimulate = speed;
 
-  simulateYears(yearsToSimulate);
+    simulateYears(yearsToSimulate);
 
-  timer = setTimeout(
-    runTimer,
-    1000
-  );
+    timer = setTimeout(
+      runTimer,
+      1000
+    );
 
-}
+  }
 
 
   function setSpeed(newSpeed) {
 
-  speed = newSpeed;
+    speed = newSpeed;
 
-  document.getElementById("worldStatus").textContent =
-    "世界運轉速度：×" + speed.toLocaleString();
+    document.getElementById("worldStatus").textContent =
+      "世界運轉速度：×" + speed.toLocaleString();
 
-}
+  }
 
 
   function resetWorld() {
