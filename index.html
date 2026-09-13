@@ -1447,80 +1447,41 @@ const explorationNames = {
 };
 
 
-function createExplorationName(
-  type,
-  index,
-  seed
-) {
+function createExplorationName(type, index, seed) {
 
   const list =
     explorationNames[type];
 
-
-  const first =
-    list[
-      index % list.length
-    ];
-
-
-  const number =
-    Math.floor(
-      index / list.length
-    );
-
+  const suffix =
+    type === "supercluster"
+      ? "超星系團"
+      : type === "cluster"
+        ? "星系團"
+        : "星系";
 
   /*
-   * 加入種子，
-   * 讓不同世界即使 index 一樣，
-   * 名稱也可能不同。
+   * 使用世界 Seed + 類型 + index
+   * 讓每個天體都有自己的固定隨機名稱。
+   *
+   * 同一個世界：
+   * 同一個 index → 永遠得到同一個名稱
+   *
+   * 不同世界：
+   * Seed 不同 → 名稱也會不同
    */
 
-  const variation =
+  const nameSeed =
     seededInteger(
       seed,
       type + "-name-" + index,
       0,
-      999
+      list.length - 1
     );
 
+  const first =
+    list[nameSeed];
 
-  if (
-    number === 0 &&
-    variation % 3 !== 0
-  ) {
-
-    return first +
-      (
-        type === "supercluster"
-          ? "超星系團"
-          : type === "cluster"
-            ? "星系團"
-            : "星系"
-      );
-
-  }
-
-
-  return (
-
-    first +
-
-    (
-      type === "supercluster"
-        ? "超星系團"
-        : type === "cluster"
-          ? "星系團"
-          : "星系"
-    ) +
-
-    " · " +
-
-    (
-      number + 1
-    )
-
-  );
-
+  return first + suffix;
 }
 
 
