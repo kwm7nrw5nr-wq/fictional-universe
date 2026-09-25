@@ -941,20 +941,21 @@ function createWorld() {
 
     exploration: {
 
-      discovered: 0,
+  discovered: 0,
 
-      /*
-       * 不把所有宇宙內容全部存下來。
-       *
-       * 只記錄玩家真正探索過的部分。
-       */
+  discoveredGalaxies: 0,
 
-      discoveredObjects: {},
+  /*
+   * 不把所有宇宙內容全部存下來。
+   *
+   * 只記錄玩家真正探索過的部分。
+   */
 
-      generated: {}
+  discoveredObjects: {},
 
-    }
+  generated: {}
 
+}
   };
 
 }
