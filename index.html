@@ -2555,31 +2555,33 @@ function renderGalaxies(
 
 
           /*
-           * 發現新的星系時，
-           * 世界狀態的「星系」也更新。
-           */
+ * 發現新的星系時，
+ * 更新「已探索星系」數量。
+ */
 
-          const wasNew =
-            !world
-              .exploration
-              .discoveredObjects[
-                item.id +
-                "_counted"
-              ];
+const wasNew =
+  !world
+    .exploration
+    .discoveredObjects[
+      item.id +
+      "_counted"
+    ];
 
 
-          if (wasNew) {
+if (wasNew) {
 
-            world.galaxies += 1;
+  world
+    .exploration
+    .discoveredGalaxies += 1;
 
-            world
-              .exploration
-              .discoveredObjects[
-                item.id +
-                "_counted"
-              ] = true;
+  world
+    .exploration
+    .discoveredObjects[
+      item.id +
+      "_counted"
+    ] = true;
 
-          }
+}
 
 
           saveWorld();
