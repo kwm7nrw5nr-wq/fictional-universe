@@ -2831,22 +2831,26 @@ function explorationBack() {
    已發現數量
    ================================================== */
 
-function updateDiscoveredCount() {
+const wasNew =
+  !world
+    .exploration
+    .discoveredObjects[
+      item.id +
+      "_counted"
+    ];
 
-  const element =
-    document.getElementById(
-      "discoveredCount"
-    );
+if (wasNew) {
 
+  world
+    .exploration
+    .discoveredGalaxies += 1;
 
-  if (!element) return;
-
-
-  element.textContent =
-    world
-      ?.exploration
-      ?.discovered
-      ?.toLocaleString() || "0";
+  world
+    .exploration
+    .discoveredObjects[
+      item.id +
+      "_counted"
+    ] = true;
 
 }
 
