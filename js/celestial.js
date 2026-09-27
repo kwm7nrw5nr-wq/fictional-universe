@@ -931,7 +931,7 @@ function generateStarSpectralType(
 // 恆星光譜次型生成
 // ==============================
 
-ffunction generateStarSpectralSubtype(spectralType, random) {
+function generateStarSpectralSubtype(spectralType, random) {
   const rule = STAR_SPECTRAL_SUBTYPE_RULES[spectralType];
 
   if (!rule || !rule.values.length) {
