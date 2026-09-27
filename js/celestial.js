@@ -267,8 +267,63 @@ const BROWN_DWARF_TYPES = {
 // ==============================
 
 const STELLAR_REMNANT_TYPES = {
-  whiteDwarf: {},
+
+  // ==============================
+  // 白矮星
+  // ==============================
+
+  whiteDwarf: {
+
+    DA: {
+      name: "DA型白矮星",
+      atmosphere: "氫",
+      description: "具有氫主導的大氣層"
+    },
+
+    DB: {
+      name: "DB型白矮星",
+      atmosphere: "氦",
+      description: "具有氦主導的大氣層"
+    },
+
+    DC: {
+      name: "DC型白矮星",
+      atmosphere: "無明顯譜線",
+      description: "光譜中缺乏明顯吸收譜線"
+    },
+
+    DO: {
+      name: "DO型白矮星",
+      atmosphere: "氦",
+      description: "高溫氦大氣白矮星"
+    },
+
+    DQ: {
+      name: "DQ型白矮星",
+      atmosphere: "碳",
+      description: "光譜具有碳相關特徵"
+    },
+
+    DZ: {
+      name: "DZ型白矮星",
+      atmosphere: "金屬",
+      description: "光譜中具有金屬元素特徵"
+    },
+
+    DX: {
+      name: "DX型白矮星",
+      atmosphere: "未分類",
+      description: "目前無法明確歸入其他白矮星光譜類型"
+    }
+
+  },
+
+  // ==============================
+  // 中子星
+  // ==============================
+
   neutronStar: {}
+
 };
 
 
