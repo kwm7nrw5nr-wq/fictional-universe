@@ -104,115 +104,112 @@ const BROWN_DWARF_TYPES = {
 // ==============================
 
 const STAR_SPECTRAL_SUBTYPE_RULES = {
-
   O: {
     values: [
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      9.2,
-      9.5,
-      9.7
+      { subtype: 2, weight: 1 },
+      { subtype: 3, weight: 1 },
+      { subtype: 4, weight: 1 },
+      { subtype: 5, weight: 2 },
+      { subtype: 6, weight: 3 },
+      { subtype: 7, weight: 4 },
+      { subtype: 8, weight: 5 },
+      { subtype: 9, weight: 6 },
+      { subtype: 9.2, weight: 4 },
+      { subtype: 9.5, weight: 3 },
+      { subtype: 9.7, weight: 2 }
     ]
   },
 
   B: {
     values: [
-      0,
-      0.2,
-      0.5,
-      0.7,
-      1,
-      1.5,
-      2,
-      2.5,
-      3,
-      3.5,
-      4,
-      4.5,
-      5,
-      5.5,
-      6,
-      6.5,
-      7,
-      7.5,
-      8,
-      8.5,
-      9
+      { subtype: 0, weight: 2 },
+      { subtype: 0.2, weight: 1 },
+      { subtype: 0.5, weight: 2 },
+      { subtype: 0.7, weight: 2 },
+      { subtype: 1, weight: 3 },
+      { subtype: 1.5, weight: 3 },
+      { subtype: 2, weight: 4 },
+      { subtype: 2.5, weight: 4 },
+      { subtype: 3, weight: 5 },
+      { subtype: 3.5, weight: 5 },
+      { subtype: 4, weight: 6 },
+      { subtype: 4.5, weight: 6 },
+      { subtype: 5, weight: 7 },
+      { subtype: 5.5, weight: 7 },
+      { subtype: 6, weight: 8 },
+      { subtype: 6.5, weight: 8 },
+      { subtype: 7, weight: 9 },
+      { subtype: 7.5, weight: 9 },
+      { subtype: 8, weight: 10 },
+      { subtype: 8.5, weight: 10 },
+      { subtype: 9, weight: 11 }
     ]
   },
 
   A: {
     values: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
+      { subtype: 0, weight: 1 },
+      { subtype: 1, weight: 2 },
+      { subtype: 2, weight: 3 },
+      { subtype: 3, weight: 4 },
+      { subtype: 4, weight: 5 },
+      { subtype: 5, weight: 6 },
+      { subtype: 6, weight: 7 },
+      { subtype: 7, weight: 8 },
+      { subtype: 8, weight: 9 },
+      { subtype: 9, weight: 10 }
     ]
   },
 
   F: {
     values: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
+      { subtype: 0, weight: 1 },
+      { subtype: 1, weight: 2 },
+      { subtype: 2, weight: 3 },
+      { subtype: 3, weight: 4 },
+      { subtype: 4, weight: 5 },
+      { subtype: 5, weight: 6 },
+      { subtype: 6, weight: 7 },
+      { subtype: 7, weight: 8 },
+      { subtype: 8, weight: 9 },
+      { subtype: 9, weight: 10 }
     ]
   },
 
   G: {
     values: [
-      0,
-      2,
-      5,
-      8
+      { subtype: 0, weight: 2 },
+      { subtype: 2, weight: 5 },
+      { subtype: 5, weight: 7 },
+      { subtype: 8, weight: 4 }
     ]
   },
 
   K: {
     values: [
-      0,
-      2,
-      3,
-      5,
-      7
+      { subtype: 0, weight: 2 },
+      { subtype: 2, weight: 4 },
+      { subtype: 3, weight: 5 },
+      { subtype: 5, weight: 7 },
+      { subtype: 7, weight: 5 }
     ]
   },
 
   M: {
     values: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
+      { subtype: 0, weight: 1 },
+      { subtype: 1, weight: 2 },
+      { subtype: 2, weight: 3 },
+      { subtype: 3, weight: 4 },
+      { subtype: 4, weight: 5 },
+      { subtype: 5, weight: 6 },
+      { subtype: 6, weight: 7 },
+      { subtype: 7, weight: 8 },
+      { subtype: 8, weight: 9 },
+      { subtype: 9, weight: 10 }
     ]
   }
-
 };
-
 
 // ==============================
 // 光度／體積級
