@@ -1078,3 +1078,5 @@ function generateBrownDwarf(
   };
 
 }
+
+console.log("celestial.js 已載入");
