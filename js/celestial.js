@@ -17,7 +17,77 @@
 // 恆星
 // ==============================
 
-const STAR_TYPES = {};
+const STAR_TYPES = {
+
+  // ==========================
+  // 主序星／一般恆星光譜
+  // ==========================
+
+  O: {
+    name: "O型",
+    color: "藍色",
+    temperature: "極高溫"
+  },
+
+  B: {
+    name: "B型",
+    color: "藍白色",
+    temperature: "高溫"
+  },
+
+  A: {
+    name: "A型",
+    color: "白色",
+    temperature: "較高溫"
+  },
+
+  F: {
+    name: "F型",
+    color: "黃白色",
+    temperature: "中高溫"
+  },
+
+  G: {
+    name: "G型",
+    color: "黃色",
+    temperature: "中等溫度"
+  },
+
+  K: {
+    name: "K型",
+    color: "橙色",
+    temperature: "較低溫"
+  },
+
+  M: {
+    name: "M型",
+    color: "紅色",
+    temperature: "低溫"
+  },
+
+  // ==========================
+  // 棕矮星光譜
+  // ==========================
+
+  L: {
+    name: "L型",
+    color: "紅色至紅外",
+    temperature: "極低溫"
+  },
+
+  T: {
+    name: "T型",
+    color: "紅外",
+    temperature: "極低溫"
+  },
+
+  Y: {
+    name: "Y型",
+    color: "紅外",
+    temperature: "超低溫"
+  }
+
+};
 
 
 // ==============================
