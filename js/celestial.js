@@ -96,16 +96,121 @@ const BROWN_DWARF_TYPES = {
 
 
 // ==============================
-// 一般恆星光譜次型
-// 暫存基本範圍
-// 之後會依 O～M 各型建立
-// 更精確的 MK 次型規則
+// MK 光譜次型規則
+// ==============================
+//
+// 各光譜型使用自己的次型網格。
+// 不強迫 O～M 全部使用 0～9。
 // ==============================
 
-const STAR_SPECTRAL_SUBTYPE = {
-  min: 0,
-  max: 9,
-  allowDecimal: true
+const STAR_SPECTRAL_SUBTYPE_RULES = {
+
+  O: {
+    values: [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      9.2,
+      9.5,
+      9.7
+    ]
+  },
+
+  B: {
+    values: [
+      0,
+      0.2,
+      0.5,
+      0.7,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4,
+      4.5,
+      5,
+      5.5,
+      6,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9
+    ]
+  },
+
+  A: {
+    values: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+
+  F: {
+    values: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+
+  G: {
+    values: [
+      0,
+      2,
+      5,
+      8
+    ]
+  },
+
+  K: {
+    values: [
+      0,
+      2,
+      3,
+      5,
+      7
+    ]
+  },
+
+  M: {
+    values: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+
 };
 
 
@@ -770,7 +875,6 @@ function generateStarSpectralType(
 
 // ==============================
 // 恆星光譜次型生成
-// 暫時版本
 // ==============================
 
 function generateStarSpectralSubtype(
@@ -778,43 +882,23 @@ function generateStarSpectralSubtype(
   random
 ) {
 
-  let min = 0;
-  let max = 9;
+  const rule =
+    STAR_SPECTRAL_SUBTYPE_RULES[
+      spectralType
+    ];
 
-  if (spectralType === "O") {
-    min = 2;
+  if (!rule || !rule.values.length) {
+    return null;
   }
 
-  const subtype =
-    min +
+  const index =
     Math.floor(
-      random() * (max - min + 1)
+      random() * rule.values.length
     );
 
-  return subtype;
+  return rule.values[index];
 
 }
-
-
-// ==============================
-// 光譜次型小數權重
-// 暫時保留
-// 後續改為各光譜型專屬規則
-// ==============================
-
-const STAR_SPECTRAL_DECIMAL_WEIGHTS = {
-
-  integer: 100,
-
-  ".5": 35,
-
-  ".2": 8,
-
-  ".7": 8
-
-};
-
-
 // ==============================
 // 棕矮星光譜次型生成
 // 暫時版本
