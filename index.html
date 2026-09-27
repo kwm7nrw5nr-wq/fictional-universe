@@ -2010,7 +2010,27 @@ function discoverObject(id) {
 
 }
 
+function updateDiscoveredCount() {
 
+  if (!world) return;
+
+
+  const element =
+    document.getElementById(
+      "discoveredCount"
+    );
+
+
+  if (!element) return;
+
+
+  element.textContent =
+    world.exploration.discovered
+      .toLocaleString();
+
+}
+
+  
 /* ==================================================
    初始化探索
    ================================================== */
