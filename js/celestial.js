@@ -20,7 +20,7 @@
 const STAR_TYPES = {
 
   // ==========================
-  // 主序星／一般恆星光譜
+  // 一般恆星光譜
   // ==========================
 
   O: {
@@ -63,35 +63,43 @@ const STAR_TYPES = {
     name: "M型",
     color: "紅色",
     temperature: "低溫"
-  },
+  }
 
-  // ==========================
-  // 棕矮星光譜
-  // ==========================
+};
+
+
+// ==============================
+// 棕矮星
+// ==============================
+
+const BROWN_DWARF_TYPES = {
 
   L: {
-    name: "L型",
-    color: "紅色至紅外",
-    temperature: "極低溫"
+    name: "L型棕矮星",
+    color: "深紅至紅外",
+    temperature: "低溫"
   },
 
   T: {
-    name: "T型",
+    name: "T型棕矮星",
     color: "紅外",
     temperature: "極低溫"
   },
 
   Y: {
-    name: "Y型",
+    name: "Y型棕矮星",
     color: "紅外",
     temperature: "超低溫"
   }
 
 };
 
+
 // ==============================
-// 光譜溫度細分
-// 0 最熱，9 最冷
+// 一般恆星光譜次型
+// 暫存基本範圍
+// 之後會依 O～M 各型建立
+// 更精確的 MK 次型規則
 // ==============================
 
 const STAR_SPECTRAL_SUBTYPE = {
@@ -99,6 +107,7 @@ const STAR_SPECTRAL_SUBTYPE = {
   max: 9,
   allowDecimal: true
 };
+
 
 // ==============================
 // 光度／體積級
@@ -138,6 +147,7 @@ const STAR_LUMINOSITY_CLASSES = {
 
 };
 
+
 // ==============================
 // 光度級細分
 // a：較大、較亮
@@ -169,6 +179,7 @@ const STAR_LUMINOSITY_SUBTYPES = {
   }
 
 };
+
 
 // ==============================
 // 光譜特徵後綴
@@ -207,31 +218,34 @@ const STAR_SPECTRAL_SUFFIXES = {
   }
 
 };
+
+
 // ==============================
-// 棕矮星
+// 棕矮星光譜次型
 // ==============================
 
-const BROWN_DWARF_TYPES = {
+const BROWN_DWARF_SPECTRAL_SUBTYPE = {
 
   L: {
-    name: "L型棕矮星",
-    color: "深紅至紅外",
-    temperature: "低溫"
+    min: 0,
+    max: 9,
+    allowDecimal: true
   },
 
   T: {
-    name: "T型棕矮星",
-    color: "紅外",
-    temperature: "極低溫"
+    min: 0,
+    max: 9,
+    allowDecimal: true
   },
 
   Y: {
-    name: "Y型棕矮星",
-    color: "紅外",
-    temperature: "超低溫"
+    min: 0,
+    max: 4,
+    allowDecimal: true
   }
 
 };
+
 
 // ==============================
 // 恆星殘骸
@@ -295,36 +309,32 @@ const STELLAR_REMNANT_TYPES = {
 
   neutronStar: {
 
-  // ==============================
-  // 中子星基本類型
-  // ==============================
+    pulsar: {
+      name: "脈衝星",
+      description: "高速自轉並以規律脈衝形式發出電磁輻射的中子星"
+    },
 
-  pulsar: {
-    name: "脈衝星",
-    description: "高速自轉並以規律脈衝形式發出電磁輻射的中子星"
-  },
+    magnetar: {
+      name: "磁星",
+      description: "具有極強磁場的中子星"
+    },
 
-  magnetar: {
-    name: "磁星",
-    description: "具有極強磁場的中子星"
-  },
+    millisecondPulsar: {
+      name: "毫秒脈衝星",
+      description: "自轉週期極短、可達毫秒尺度的脈衝星"
+    },
 
-  millisecondPulsar: {
-    name: "毫秒脈衝星",
-    description: "自轉週期極短、可達毫秒尺度的脈衝星"
-  },
+    xRayBinary: {
+      name: "X射線雙星中子星",
+      description: "與伴星形成雙星系統並透過吸積產生強烈X射線"
+    },
 
-  xRayBinary: {
-    name: "X射線雙星中子星",
-    description: "與伴星形成雙星系統並透過吸積產生強烈X射線"
-  },
+    isolatedNeutronStar: {
+      name: "孤立中子星",
+      description: "沒有明顯伴星、獨立存在的中子星"
+    }
 
-  isolatedNeutronStar: {
-    name: "孤立中子星",
-    description: "沒有明顯伴星、獨立存在的中子星"
   }
-
-};
 
 };
 
@@ -369,6 +379,7 @@ const BLACK_HOLE_TYPES = {
 
 };
 
+
 // ==============================
 // 黑洞質量級別
 // ==============================
@@ -397,15 +408,12 @@ const BLACK_HOLE_MASS_CLASSES = {
 
 };
 
+
 // ==============================
 // 白洞
 // ==============================
 
 const WHITE_HOLE_TYPES = {
-
-  // ==============================
-  // 白洞基本類型
-  // ==============================
 
   theoretical: {
     name: "理論白洞",
@@ -431,10 +439,6 @@ const WHITE_HOLE_TYPES = {
 
 const WORMHOLE_TYPES = {
 
-  // ==============================
-  // 天然蟲洞
-  // ==============================
-
   natural: {
 
     stellar: {
@@ -443,10 +447,6 @@ const WORMHOLE_TYPES = {
     }
 
   },
-
-  // ==============================
-  // 人造蟲洞
-  // ==============================
 
   artificial: {
 
@@ -465,10 +465,6 @@ const WORMHOLE_TYPES = {
 // ==============================
 
 const SPECIAL_CELESTIAL_TYPES = {
-
-  // ==============================
-  // 星雲
-  // ==============================
 
   nebula: {
 
@@ -501,28 +497,6 @@ const SPECIAL_CELESTIAL_TYPES = {
 
 };
 
-// ==============================
-// 恆星生成器
-// ==============================
-
-function generateStar(random) {
-
-  const types = Object.keys(STAR_TYPES);
-
-  const type =
-    types[
-      Math.floor(random() * types.length)
-    ];
-
-  const subtype =
-    Math.floor(random() * 10);
-
-  return {
-    type: type,
-    subtype: subtype
-  };
-
-}
 
 // ==============================
 // 星系年齡分類
@@ -549,6 +523,13 @@ const GALAXY_AGE_CLASSES = {
   }
 
 };
+
+
+// ==============================
+// 星系中的恆星相對權重
+// 數值越高，代表相對生成權重越高
+// ==============================
+
 const GALAXY_STAR_WEIGHTS = {
 
   young: {
@@ -583,6 +564,7 @@ const GALAXY_STAR_WEIGHTS = {
 
 };
 
+
 // ==============================
 // 恆星形成活動等級
 // ==============================
@@ -616,6 +598,11 @@ const STAR_FORMATION_LEVELS = {
 
 };
 
+
+// ==============================
+// 星系類型
+// ==============================
+
 const GALAXY_TYPES = {
 
   spiral: {
@@ -640,9 +627,10 @@ const GALAXY_TYPES = {
 
 };
 
+
 // ==============================
 // 星系類型 × 年齡
-// 恆星形成率修正
+// 恆星形成活動修正
 // ==============================
 
 const GALAXY_STAR_FORMATION_MODIFIERS = {
@@ -672,6 +660,7 @@ const GALAXY_STAR_FORMATION_MODIFIERS = {
   }
 
 };
+
 
 // ==============================
 // 加權隨機選擇
@@ -708,21 +697,6 @@ function weightedRandom(weights, random) {
 
 }
 
-// ==============================
-// 恆星基礎生成權重
-// ==============================
-
-const BASE_STAR_GENERATION_WEIGHTS = {
-
-  O: 1,
-  B: 3,
-  A: 8,
-  F: 15,
-  G: 30,
-  K: 70,
-  M: 300
-
-};
 
 // ==============================
 // 計算星系環境下的恆星生成權重
@@ -734,32 +708,39 @@ function calculateStarGenerationWeights(
   formationLevel
 ) {
 
-  const base =
-    BASE_STAR_GENERATION_WEIGHTS;
-
-  const ageModifier =
-    GALAXY_STAR_FORMATION_MODIFIERS[
-      galaxyType
-    ][galaxyAge];
+  const ageWeights =
+    GALAXY_STAR_WEIGHTS[
+      galaxyAge
+    ];
 
   const formationMultiplier =
     STAR_FORMATION_LEVELS[
       formationLevel
     ].multiplier;
 
+  const galaxyModifier =
+    GALAXY_STAR_FORMATION_MODIFIERS[
+      galaxyType
+    ][galaxyAge];
+
   const weights = {};
 
-  for (const type of Object.keys(base)) {
+  for (const type of Object.keys(STAR_TYPES)) {
+
+    const ageWeight =
+      ageWeights[type];
 
     weights[type] =
-      base[type] *
-      ageModifier *
-      formationMultiplier;
+      ageWeight *
+      formationMultiplier *
+      galaxyModifier;
 
   }
 
   return weights;
+
 }
+
 
 // ==============================
 // 依星系環境生成恆星光譜型
@@ -786,8 +767,10 @@ function generateStarSpectralType(
 
 }
 
+
 // ==============================
 // 恆星光譜次型生成
+// 暫時版本
 // ==============================
 
 function generateStarSpectralSubtype(
@@ -812,8 +795,11 @@ function generateStarSpectralSubtype(
 
 }
 
+
 // ==============================
 // 光譜次型小數權重
+// 暫時保留
+// 後續改為各光譜型專屬規則
 // ==============================
 
 const STAR_SPECTRAL_DECIMAL_WEIGHTS = {
@@ -827,3 +813,108 @@ const STAR_SPECTRAL_DECIMAL_WEIGHTS = {
   ".7": 8
 
 };
+
+
+// ==============================
+// 棕矮星光譜次型生成
+// 暫時版本
+// ==============================
+
+function generateBrownDwarfSpectralSubtype(
+  spectralType,
+  random
+) {
+
+  const rule =
+    BROWN_DWARF_SPECTRAL_SUBTYPE[
+      spectralType
+    ];
+
+  if (!rule) {
+    return null;
+  }
+
+  const subtype =
+    rule.min +
+    Math.floor(
+      random() *
+      (rule.max - rule.min + 1)
+    );
+
+  return subtype;
+
+}
+
+
+// ==============================
+// 恆星生成器
+// ==============================
+//
+// 注意：
+// L / T / Y 已經從 STAR_TYPES 分離，
+// 不會再被當成普通恆星生成。
+// ==============================
+
+function generateStar(
+  galaxyType,
+  galaxyAge,
+  formationLevel,
+  random
+) {
+
+  const spectralType =
+    generateStarSpectralType(
+      galaxyType,
+      galaxyAge,
+      formationLevel,
+      random
+    );
+
+  const subtype =
+    generateStarSpectralSubtype(
+      spectralType,
+      random
+    );
+
+  return {
+    category: "star",
+    type: spectralType,
+    subtype: subtype
+  };
+
+}
+
+
+// ==============================
+// 棕矮星生成器
+// ==============================
+
+function generateBrownDwarf(
+  random
+) {
+
+  const types =
+    Object.keys(
+      BROWN_DWARF_TYPES
+    );
+
+  const type =
+    types[
+      Math.floor(
+        random() * types.length
+      )
+    ];
+
+  const subtype =
+    generateBrownDwarfSpectralSubtype(
+      type,
+      random
+    );
+
+  return {
+    category: "brownDwarf",
+    type: type,
+    subtype: subtype
+  };
+
+}
