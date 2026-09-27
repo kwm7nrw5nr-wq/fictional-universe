@@ -997,23 +997,35 @@ function loadWorld() {
         JSON.parse(saved);
 
 
-      /*
-       * 舊版本存檔相容
-       */
+/*
+ * 舊版本存檔相容
+ */
 
-      if (!world.exploration) {
+if (!world.exploration) {
 
-        world.exploration = {
+  world.exploration = {
 
-          discovered: 0,
+    discovered: 0,
 
-          discoveredObjects: {},
+    discoveredGalaxies: 0,
 
-          generated: {}
+    discoveredObjects: {},
 
-        };
+    generated: {}
 
-      }
+  };
+
+}
+
+
+if (
+  typeof world.exploration.discoveredGalaxies
+  !== "number"
+) {
+
+  world.exploration.discoveredGalaxies = 0;
+
+}
 
 
       if (
