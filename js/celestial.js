@@ -1015,6 +1015,35 @@ function generateStar(
 
 }
 
+function generateStarPopulation(
+  galaxyType,
+  galaxyAge,
+  formationLevel,
+  random
+) {
+
+  const count =
+    generateStarCount(
+      formationLevel,
+      random
+    );
+
+  const stars = [];
+
+  for (let i = 0; i < count; i++) {
+    stars.push(
+      generateStar(
+        galaxyType,
+        galaxyAge,
+        formationLevel,
+        random
+      )
+    );
+  }
+
+  return stars;
+}
+
 
 // ==============================
 // 棕矮星生成器
