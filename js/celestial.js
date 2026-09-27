@@ -322,7 +322,38 @@ const STELLAR_REMNANT_TYPES = {
   // 中子星
   // ==============================
 
-  neutronStar: {}
+  neutronStar: {
+
+  // ==============================
+  // 中子星基本類型
+  // ==============================
+
+  pulsar: {
+    name: "脈衝星",
+    description: "高速自轉並以規律脈衝形式發出電磁輻射的中子星"
+  },
+
+  magnetar: {
+    name: "磁星",
+    description: "具有極強磁場的中子星"
+  },
+
+  millisecondPulsar: {
+    name: "毫秒脈衝星",
+    description: "自轉週期極短、可達毫秒尺度的脈衝星"
+  },
+
+  xRayBinary: {
+    name: "X射線雙星中子星",
+    description: "與伴星形成雙星系統並透過吸積產生強烈X射線"
+  },
+
+  isolatedNeutronStar: {
+    name: "孤立中子星",
+    description: "沒有明顯伴星、獨立存在的中子星"
+  }
+
+};
 
 };
 
