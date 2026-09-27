@@ -2827,35 +2827,6 @@ function explorationBack() {
 
 }
 
-
-/* ==================================================
-   已發現數量
-   ================================================== */
-
-const wasNew =
-  !world
-    .exploration
-    .discoveredObjects[
-      item.id +
-      "_counted"
-    ];
-
-if (wasNew) {
-
-  world
-    .exploration
-    .discoveredGalaxies += 1;
-
-  world
-    .exploration
-    .discoveredObjects[
-      item.id +
-      "_counted"
-    ] = true;
-
-}
-
-
 /* ==================================================
    重置世界
    ================================================== */
