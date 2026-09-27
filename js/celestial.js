@@ -858,6 +858,18 @@ function weightedRandom(weights, random) {
 
 }
 
+function generateStarCount(formationLevel, random) {
+  const range = STAR_FORMATION_COUNT_RANGES[formationLevel];
+
+  if (!range) {
+    return 0;
+  }
+
+  return (
+    range.min +
+    Math.floor(random() * (range.max - range.min + 1))
+  );
+}
 
 // ==============================
 // 計算星系環境下的恆星生成權重
