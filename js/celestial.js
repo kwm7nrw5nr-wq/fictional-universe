@@ -100,13 +100,6 @@ const STAR_SPECTRAL_SUBTYPE = {
   allowDecimal: true
 };
 
-const STAR_SPECTRAL_SUBTYPE = {
-  min: 0,
-  max: 9,
-  allowDecimal: true
-};
-
-
 // ==============================
 // 光度／體積級
 // ==============================
@@ -217,28 +210,6 @@ const STAR_SPECTRAL_SUFFIXES = {
 // ==============================
 // 棕矮星
 // ==============================
-
-const BROWN_DWARF_TYPES = {
-
-  L: {
-    name: "L型棕矮星",
-    color: "深紅至紅外",
-    temperature: "低溫"
-  },
-
-  T: {
-    name: "T型棕矮星",
-    color: "紅外",
-    temperature: "極低溫"
-  },
-
-  Y: {
-    name: "Y型棕矮星",
-    color: "紅外",
-    temperature: "超低溫"
-  }
-
-};
 
 const BROWN_DWARF_TYPES = {
 
