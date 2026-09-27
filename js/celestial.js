@@ -874,28 +874,21 @@ function generateStarSpectralType(
 // 恆星光譜次型生成
 // ==============================
 
-function generateStarSpectralSubtype(
-  spectralType,
-  random
-) {
-
-  const rule =
-    STAR_SPECTRAL_SUBTYPE_RULES[
-      spectralType
-    ];
+ffunction generateStarSpectralSubtype(spectralType, random) {
+  const rule = STAR_SPECTRAL_SUBTYPE_RULES[spectralType];
 
   if (!rule || !rule.values.length) {
     return null;
   }
 
-  const index =
-    Math.floor(
-      random() * rule.values.length
-    );
+  const weights = {};
+  for (const item of rule.values) {
+    weights[item.subtype] = item.weight;
+  }
 
-  return rule.values[index];
-
+  return weightedRandom(weights, random);
 }
+
 // ==============================
 // 棕矮星光譜次型生成
 // 暫時版本
