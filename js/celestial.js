@@ -855,43 +855,29 @@ function weightedRandom(weights, random) {
 // 計算星系環境下的恆星生成權重
 // ==============================
 
-function calculateStarGenerationWeights(
-  galaxyType,
-  galaxyAge,
-  formationLevel
-) {
-
-  const ageWeights =
-    GALAXY_STAR_WEIGHTS[
-      galaxyAge
-    ];
-
-  const formationMultiplier =
-    STAR_FORMATION_LEVELS[
-      formationLevel
-    ].multiplier;
+function calculateStarGenerationWeights(galaxyType, galaxyAge, formationLevel) {
+  const ageWeights = GALAXY_STAR_WEIGHTS[galaxyAge];
+  const formationData = STAR_FORMATION_LEVELS[formationLevel];
+  const formationSpectralModifiers =
+    STAR_FORMATION_SPECTRAL_MODIFIERS[formationLevel];
 
   const galaxyModifier =
-    GALAXY_STAR_FORMATION_MODIFIERS[
-      galaxyType
-    ][galaxyAge];
+    GALAXY_STAR_FORMATION_MODIFIERS[galaxyType][galaxyAge];
 
   const weights = {};
 
   for (const type of Object.keys(STAR_TYPES)) {
-
-    const ageWeight =
-      ageWeights[type];
+    const ageWeight = ageWeights[type];
+    const spectralModifier = formationSpectralModifiers[type];
 
     weights[type] =
       ageWeight *
-      formationMultiplier *
+      spectralModifier *
+      formationData.multiplier *
       galaxyModifier;
-
   }
 
   return weights;
-
 }
 
 
