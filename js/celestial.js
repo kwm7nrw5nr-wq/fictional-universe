@@ -700,6 +700,14 @@ const STAR_FORMATION_LEVELS = {
 
 };
 
+const STAR_FORMATION_COUNT_RANGES = {
+  extreme: { min: 8, max: 20 },
+  high: { min: 5, max: 12 },
+  medium: { min: 3, max: 8 },
+  low: { min: 1, max: 4 },
+  dormant: { min: 0, max: 1 }
+};
+
 const STAR_FORMATION_SPECTRAL_MODIFIERS = {
   extreme: {
     O: 2.5,
