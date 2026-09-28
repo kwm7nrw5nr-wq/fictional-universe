@@ -1329,7 +1329,7 @@ function renderStarSystem(
    */
 
 
-  const starCount =
+const starCount =
   seededInteger(
     world.seed,
     current.id + "-star-count",
@@ -1337,55 +1337,51 @@ function renderStarSystem(
     7
   );
 
+for (
+  let i = 0;
+  i < starCount;
+  i++
+) {
 
-  const planetCount =
-    seededInteger(
+  const starId =
+    current.id +
+    "-star-" +
+    i;
 
-      world.seed,
-
-      current.id +
-      "-planet-count",
-
-      0,
-
-      12
-
-    );
-
+  const starName =
+    current.name +
+    " " +
+    String.fromCharCode(
+      65 + i
+    ) +
+    "星";
 
   const starCard =
     createExplorationCard(
-
       "☀️",
-
-      current.name +
-      " 主恆星",
-
+      starName,
       "恆星",
-
       "探索這顆恆星",
-
       function () {
 
         discoverObject(
-          current.id +
-          "-star-0"
+          starId
         );
 
         alert(
           "☀️ 已發現「" +
-          current.name +
-          "」的主恆星。"
+          starName +
+          "」。"
         );
 
       }
-
     );
-
 
   grid.appendChild(
     starCard
   );
+
+}
 
 
   const planetNotice =
