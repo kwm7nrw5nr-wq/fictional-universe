@@ -157,11 +157,13 @@ function createExplorationName(type, index, seed) {
     explorationNames[type];
 
   const suffix =
-    type === "supercluster"
-      ? "超星系團"
-      : type === "cluster"
-        ? "星系團"
-        : "星系";
+     type === "supercluster"
+       ? "超星系團"
+       : type === "cluster"
+         ? "星系團"
+         : type === "galaxy"
+           ? "星系"
+           : "";
 
   const firstIndex =
     seededInteger(
