@@ -134,8 +134,6 @@ const explorationNames = {
     ]
   }
 
-};
-
   starSystem: {
     first: [
       "曙光", "銀河", "天琴", "星河",
@@ -149,7 +147,8 @@ const explorationNames = {
       "原", "穹", "域", "庭",
       "灣", "冕", "序", "歌"
     ]
-  },
+  }
+};
 
 
 function createExplorationName(type, index, seed) {
