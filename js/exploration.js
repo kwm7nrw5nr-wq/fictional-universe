@@ -132,7 +132,7 @@ const explorationNames = {
       "星野",
       "星庭"
     ]
-  }
+  },
 
   starSystem: {
     first: [
