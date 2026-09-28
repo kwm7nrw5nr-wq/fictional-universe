@@ -1303,6 +1303,112 @@ function () {
 
 }
 
+/* ==================================================
+   顯示恆星系
+   ================================================== */
+
+function renderStarSystem(
+  grid,
+  current
+) {
+
+  /*
+   * 目前先建立恆星系的第一層探索資料。
+   *
+   * 之後會逐步加入：
+   *
+   * 恆星
+   * 行星
+   * 衛星
+   * 小行星帶
+   * 彗星
+   * 生命
+   * 文明
+   * 異常
+   * 星神相關資訊
+   */
+
+
+  const starCount =
+    1;
+
+
+  const planetCount =
+    seededInteger(
+
+      world.seed,
+
+      current.id +
+      "-planet-count",
+
+      0,
+
+      12
+
+    );
+
+
+  const starCard =
+    createExplorationCard(
+
+      "☀️",
+
+      current.name +
+      " 主恆星",
+
+      "恆星",
+
+      "探索這顆恆星",
+
+      function () {
+
+        discoverObject(
+          current.id +
+          "-star-0"
+        );
+
+        alert(
+          "☀️ 已發現「" +
+          current.name +
+          "」的主恆星。"
+        );
+
+      }
+
+    );
+
+
+  grid.appendChild(
+    starCard
+  );
+
+
+  const planetNotice =
+    document.createElement(
+      "div"
+    );
+
+
+  planetNotice.className =
+    "exploration-notice";
+
+
+  planetNotice.innerHTML =
+
+    "🪐 目前觀測到約 <strong>" +
+
+    planetCount.toLocaleString() +
+
+    "</strong> 顆行星。<br>" +
+
+    "下一階段將逐一探索行星及其衛星。";
+
+
+  grid.appendChild(
+    planetNotice
+  );
+
+}
 
 /* ==================================================
    探索卡片
