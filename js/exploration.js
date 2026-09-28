@@ -136,6 +136,21 @@ const explorationNames = {
 
 };
 
+  starSystem: {
+    first: [
+      "曙光", "銀河", "天琴", "星河",
+      "蒼穹", "赤曜", "幽藍", "霜月",
+      "晨曦", "暮星", "深空", "燦星",
+      "玄夜", "流光", "寂星", "遠星"
+    ],
+    second: [
+      "星", "辰", "輝", "塵",
+      "曜", "環", "瀾", "境",
+      "原", "穹", "域", "庭",
+      "灣", "冕", "序", "歌"
+    ]
+  },
+
 
 function createExplorationName(type, index, seed) {
 
