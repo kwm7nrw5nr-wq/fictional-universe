@@ -658,7 +658,11 @@ function getExplorationIcon(
     type === "galaxy"
   ) return "🌀";
 
+if (
+  type === "starSystem"
+) return "⭐";
 
+   
   return "📍";
 
 }
