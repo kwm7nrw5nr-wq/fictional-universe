@@ -1330,7 +1330,12 @@ function renderStarSystem(
 
 
   const starCount =
-    1;
+  seededInteger(
+    world.seed,
+    current.id + "-star-count",
+    1,
+    7
+  );
 
 
   const planetCount =
