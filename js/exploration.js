@@ -174,5 +174,1046 @@ function createExplorationName(type, index, seed) {
   return first + second + suffix;
 }
 
+/* ==================================================
+   超星系團
+   ================================================== */
+
+function getSupercluster(
+  index
+) {
+
+  const id =
+    "sc_" +
+    index;
+
+
+  const seed =
+    world.seed;
+
+
+  const clusterCount =
+    seededInteger(
+      seed,
+      id + "-cluster-count",
+      30,
+      500
+    );
+
+
+  return {
+
+    id: id,
+
+    index: index,
+
+    name:
+      createExplorationName(
+        "supercluster",
+        index,
+        seed
+      ),
+
+    clusters:
+      clusterCount,
+
+    discovered:
+      isDiscovered(id)
+
+  };
+
+}
+
+
+/* ==================================================
+   星系團
+   ================================================== */
+
+function getCluster(
+  superclusterIndex,
+  clusterIndex
+) {
+
+  const id =
+
+    "sc_" +
+    superclusterIndex +
+
+    "_c_" +
+    clusterIndex;
+
+
+  const galaxyCount =
+    seededInteger(
+      world.seed,
+      id + "-galaxy-count",
+      20,
+      300
+    );
+
+
+  return {
+
+    id: id,
+
+    index:
+      clusterIndex,
+
+    name:
+      createExplorationName(
+        "cluster",
+        clusterIndex,
+        world.seed +
+        superclusterIndex
+      ),
+
+    galaxies:
+      galaxyCount,
+
+    discovered:
+      isDiscovered(id)
+
+  };
+
+}
+
+
+/* ==================================================
+   星系
+   ================================================== */
+
+function getGalaxy(
+  superclusterIndex,
+  clusterIndex,
+  galaxyIndex
+) {
+
+  const id =
+
+    "sc_" +
+    superclusterIndex +
+
+    "_c_" +
+    clusterIndex +
+
+    "_g_" +
+    galaxyIndex;
+
+
+  const starSystemCount =
+    seededInteger(
+      world.seed,
+      id + "-star-system-count",
+      100,
+      10000
+    );
+
+
+  return {
+
+    id: id,
+
+    index:
+      galaxyIndex,
+
+    name:
+      createExplorationName(
+        "galaxy",
+        galaxyIndex,
+        world.seed +
+        superclusterIndex +
+        clusterIndex
+      ),
+
+    starSystems:
+      starSystemCount,
+
+    discovered:
+      isDiscovered(id)
+
+  };
+
+}
+
+ 
+
+/* ==================================================
+   已發現系統
+   ================================================== */
+
+function isDiscovered(id) {
+
+  return Boolean(
+
+    world
+      .exploration
+      .discoveredObjects[id]
+
+  );
+
+}
+
+
+function discoverObject(id) {
+
+  if (
+    isDiscovered(id)
+  ) {
+
+    return;
+
+  }
+
+
+  world
+    .exploration
+    .discoveredObjects[id] =
+      true;
+
+
+  world
+    .exploration
+    .discovered++;
+
+
+  saveWorld();
+
+}
+
+function updateDiscoveredCount() {
+
+  if (!world) return;
+
+
+  const element =
+    document.getElementById(
+      "discoveredCount"
+    );
+
+
+  if (!element) return;
+
+
+  element.textContent =
+    world.exploration.discovered
+      .toLocaleString();
+
+}
+
+  
+/* ==================================================
+   初始化探索
+   ================================================== */
+
+function initializeExploration() {
+
+  if (!world) return;
+
+
+  if (
+    !world.exploration
+  ) {
+
+    world.exploration = {
+
+      discovered: 0,
+
+      discoveredObjects: {},
+
+      generated: {}
+
+    };
+
+  }
+
+
+  explorationData =
+    world.exploration;
+
+
+  renderExploration();
+
+}
+
+
+/* ==================================================
+   探索畫面
+   ================================================== */
+
+function renderExploration() {
+
+  const grid =
+    document.getElementById(
+      "explorationGrid"
+    );
+
+
+  const title =
+    document.getElementById(
+      "explorationTitle"
+    );
+
+
+  const path =
+    document.getElementById(
+      "explorationPath"
+    );
+
+
+  const location =
+    document.getElementById(
+      "currentLocation"
+    );
+
+
+  const status =
+    document.getElementById(
+      "explorationStatus"
+    );
+
+
+  const back =
+    document.getElementById(
+      "explorationBack"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "explorationEmpty"
+    );
+
+
+  if (!grid) return;
+
+
+  grid.innerHTML = "";
+
+  empty.style.display = "none";
+
+
+  const current =
+    explorationStack[
+      explorationStack.length - 1
+    ];
+
+
+  title.textContent =
+
+    getExplorationIcon(
+      current.type
+    ) +
+
+    " " +
+
+    current.name;
+
+
+  location.textContent =
+    current.name;
+
+
+  path.textContent =
+
+    "目前位置：" +
+
+    explorationStack
+      .map(
+        item =>
+          item.name
+      )
+      .join(" → ");
+
+
+  back.disabled =
+    explorationStack.length <= 1;
+
+
+  if (
+    current.type ===
+    "universe"
+  ) {
+
+    status.textContent =
+      "探索宇宙";
+
+
+    renderSuperclusters(
+      grid
+    );
+
+  }
+
+
+  else if (
+    current.type ===
+    "supercluster"
+  ) {
+
+    status.textContent =
+      "探索超星系團";
+
+
+    renderClusters(
+      grid,
+      current
+    );
+
+  }
+
+
+  else if (
+    current.type ===
+    "cluster"
+  ) {
+
+    status.textContent =
+      "探索星系團";
+
+
+    renderGalaxies(
+      grid,
+      current
+    );
+
+  }
+
+
+  else if (
+    current.type ===
+    "galaxy"
+  ) {
+
+    status.textContent =
+      "探索星系";
+
+
+    renderGalaxyPlaceholder(
+      grid,
+      current
+    );
+
+  }
+
+
+  updateDiscoveredCount();
+
+}
+
+
+/* ==================================================
+   圖示
+   ================================================== */
+
+function getExplorationIcon(
+  type
+) {
+
+  if (
+    type === "universe"
+  ) return "🌌";
+
+
+  if (
+    type === "supercluster"
+  ) return "✨";
+
+
+  if (
+    type === "cluster"
+  ) return "🌠";
+
+
+  if (
+    type === "galaxy"
+  ) return "🌀";
+
+
+  return "📍";
+
+}
+
+
+/* ==================================================
+   顯示超星系團
+   ================================================== */
+
+function renderSuperclusters(
+  grid
+) {
+
+  /*
+   * 注意：
+   *
+   * 宇宙可能有非常多超星系團，
+   * 不一次把全部幾千甚至更多項目塞進手機。
+   *
+   * 目前每次顯示最多 30 個。
+   */
+
+  const visibleCount =
+    Math.min(
+      world.superclusters,
+      30
+    );
+
+
+  for (
+    let i = 0;
+    i < visibleCount;
+    i++
+  ) {
+
+    const item =
+      getSupercluster(i);
+
+
+    const card =
+      createExplorationCard(
+
+        "✨",
+
+        item.name,
+
+        "超星系團",
+
+        "包含約 " +
+        item.clusters.toLocaleString() +
+        " 個星系團",
+
+        function () {
+
+          discoverObject(
+            item.id
+          );
+
+
+          explorationStack.push({
+
+            type:
+              "supercluster",
+
+            name:
+              item.name,
+
+            id:
+              item.id,
+
+            index:
+              item.index
+
+          });
+
+
+          renderExploration();
+
+        }
+
+      );
+
+
+    grid.appendChild(
+      card
+    );
+
+  }
+
+
+  if (
+    world.superclusters > 30
+  ) {
+
+    const notice =
+      document.createElement(
+        "div"
+      );
+
+
+    notice.className =
+      "exploration-notice";
+
+
+    notice.innerHTML =
+
+      "🌌 這個宇宙共有 <strong>" +
+
+      world.superclusters.toLocaleString() +
+
+      "</strong> 個超星系團。<br>" +
+
+      "目前顯示的是第一批探索區域。<br>" +
+
+      "後續將加入真正的宇宙座標與區域探索。";
+
+
+    grid.appendChild(
+      notice
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   顯示星系團
+   ================================================== */
+
+function renderClusters(
+  grid,
+  current
+) {
+
+  const superclusterIndex =
+    current.index;
+
+
+  const supercluster =
+    getSupercluster(
+      superclusterIndex
+    );
+
+
+  if (!supercluster) return;
+
+
+  /*
+   * 同樣不一次塞入全部。
+   */
+
+  const visibleCount =
+    Math.min(
+      supercluster.clusters,
+      40
+    );
+
+
+  for (
+    let i = 0;
+    i < visibleCount;
+    i++
+  ) {
+
+    const item =
+      getCluster(
+        superclusterIndex,
+        i
+      );
+
+
+    const card =
+      createExplorationCard(
+
+        "🌠",
+
+        item.name,
+
+        "星系團",
+
+        "包含約 " +
+        item.galaxies.toLocaleString() +
+        " 個星系",
+
+        function () {
+
+          discoverObject(
+            item.id
+          );
+
+
+          explorationStack.push({
+
+            type:
+              "cluster",
+
+            name:
+              item.name,
+
+            id:
+              item.id,
+
+            index:
+              item.index,
+
+            superclusterIndex:
+              superclusterIndex
+
+          });
+
+
+          renderExploration();
+
+        }
+
+      );
+
+
+    grid.appendChild(
+      card
+    );
+
+  }
+
+
+  if (
+    supercluster.clusters > 40
+  ) {
+
+    const notice =
+      document.createElement(
+        "div"
+      );
+
+
+    notice.className =
+      "exploration-notice";
+
+
+    notice.innerHTML =
+
+      "🌠 這個超星系團共有 <strong>" +
+
+      supercluster.clusters.toLocaleString() +
+
+      "</strong> 個星系團。<br>" +
+
+      "目前顯示這個區域的第一批星系團。";
+
+
+    grid.appendChild(
+      notice
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   顯示星系
+   ================================================== */
+
+function renderGalaxies(
+  grid,
+  current
+) {
+
+  const superclusterIndex =
+    current.superclusterIndex;
+
+
+  const clusterIndex =
+    current.index;
+
+
+  const cluster =
+    getCluster(
+      superclusterIndex,
+      clusterIndex
+    );
+
+
+  if (!cluster) return;
+
+
+  const visibleCount =
+    Math.min(
+      cluster.galaxies,
+      40
+    );
+
+
+  for (
+    let i = 0;
+    i < visibleCount;
+    i++
+  ) {
+
+    const item =
+      getGalaxy(
+        superclusterIndex,
+        clusterIndex,
+        i
+      );
+
+
+    const card =
+      createExplorationCard(
+
+        "🌀",
+
+        item.name,
+
+        "星系",
+
+        "恆星系：約 " +
+        item.starSystems.toLocaleString() +
+        " 個",
+
+        function () {
+
+          discoverObject(
+            item.id
+          );
+
+
+          /*
+ * 發現新的星系時，
+ * 更新「已探索星系」數量。
+ */
+
+const wasNew =
+  !world
+    .exploration
+    .discoveredObjects[
+      item.id +
+      "_counted"
+    ];
+
+
+if (wasNew) {
+
+  world
+    .exploration
+    .discoveredGalaxies += 1;
+
+  world
+    .exploration
+    .discoveredObjects[
+      item.id +
+      "_counted"
+    ] = true;
+
+}
+
+
+          saveWorld();
+
+          updateDisplay();
+
+
+          explorationStack.push({
+
+            type:
+              "galaxy",
+
+            name:
+              item.name,
+
+            id:
+              item.id,
+
+            index:
+              item.index,
+
+            clusterIndex:
+              clusterIndex,
+
+            superclusterIndex:
+              superclusterIndex
+
+          });
+
+
+          renderExploration();
+
+        }
+
+      );
+
+
+    grid.appendChild(
+      card
+    );
+
+  }
+
+
+  if (
+    cluster.galaxies > 40
+  ) {
+
+    const notice =
+      document.createElement(
+        "div"
+      );
+
+
+    notice.className =
+      "exploration-notice";
+
+
+    notice.innerHTML =
+
+      "🌀 這個星系團共有 <strong>" +
+
+      cluster.galaxies.toLocaleString() +
+
+      "</strong> 個星系。<br>" +
+
+      "目前顯示這個區域的第一批星系。";
+
+
+    grid.appendChild(
+      notice
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   星系入口
+   ================================================== */
+
+function renderGalaxyPlaceholder(
+  grid,
+  galaxy
+) {
+
+  const card =
+    createExplorationCard(
+
+      "⭐",
+
+      "進入星系",
+
+      galaxy.name,
+
+      "下一階段：恆星系探索",
+
+      function () {
+
+        alert(
+
+          "🚧 恆星系探索正在建造中。\n\n" +
+
+          "下一階段將可以探索：\n" +
+
+          "恆星 → 行星 → 衛星 → 文明 → 遺跡 → 神殿"
+
+        );
+
+      }
+
+    );
+
+
+  grid.appendChild(
+    card
+  );
+
+
+  const notice =
+    document.createElement(
+      "div"
+    );
+
+
+  notice.className =
+    "exploration-notice";
+
+
+  notice.innerHTML =
+
+    "🔭 你已抵達「" +
+
+    galaxy.name +
+
+    "」。<br>" +
+
+    "這裡將成為下一階段的星系探索入口。";
+
+
+  grid.appendChild(
+    notice
+  );
+
+}
+
+
+/* ==================================================
+   探索卡片
+   ================================================== */
+
+function createExplorationCard(
+  icon,
+  name,
+  type,
+  description,
+  action
+) {
+
+  const card =
+    document.createElement(
+      "button"
+    );
+
+
+  card.className =
+    "exploration-card";
+
+
+  card.type =
+    "button";
+
+
+  card.innerHTML =
+
+    '<div class="exploration-icon">' +
+    icon +
+    '</div>' +
+
+    '<div class="exploration-card-content">' +
+
+    '<div class="exploration-card-name">' +
+    name +
+    '</div>' +
+
+    '<div class="exploration-card-type">' +
+    type +
+    '</div>' +
+
+    '<div class="exploration-card-description">' +
+    description +
+    '</div>' +
+
+    '</div>' +
+
+    '<div class="exploration-arrow">›</div>';
+
+
+  card.addEventListener(
+    "click",
+    action
+  );
+
+
+  return card;
+
+}
+
+
+/* ==================================================
+   返回
+   ================================================== */
+
+function explorationBack() {
+
+  if (
+    explorationStack.length <= 1
+  ) {
+
+    return;
+
+  }
+
+
+  explorationStack.pop();
+
+
+  renderExploration();
+
+}
 
 console.log("exploration.js 已載入");
