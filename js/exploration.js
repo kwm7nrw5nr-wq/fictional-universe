@@ -887,6 +887,56 @@ function renderClusters(
 
 }
 
+/* ==================================================
+   恆星系資料
+   ================================================== */
+
+function getStarSystem(
+  superclusterIndex,
+  clusterIndex,
+  galaxyIndex,
+  starSystemIndex
+) {
+
+  const id =
+
+    "sc_" +
+    superclusterIndex +
+
+    "_c_" +
+    clusterIndex +
+
+    "_g_" +
+    galaxyIndex +
+
+    "_s_" +
+    starSystemIndex;
+
+
+  const name =
+
+    "第 " +
+    (starSystemIndex + 1) +
+    " 號恆星系";
+
+
+  return {
+
+    id: id,
+
+    index:
+      starSystemIndex,
+
+    name:
+      name,
+
+    discovered:
+      isDiscovered(id)
+
+  };
+
+}
+
 
 /* ==================================================
    顯示星系
@@ -1063,7 +1113,7 @@ if (wasNew) {
 
 
 /* ==================================================
-   星系入口
+   顯示恆星系
    ================================================== */
 
 function renderGalaxyPlaceholder(
@@ -1071,37 +1121,104 @@ function renderGalaxyPlaceholder(
   galaxy
 ) {
 
-  const card =
-    createExplorationCard(
+  const superclusterIndex =
+    galaxy.superclusterIndex;
 
-      "⭐",
 
-      "進入星系",
+  const clusterIndex =
+    galaxy.clusterIndex;
 
-      galaxy.name,
 
-      "下一階段：恆星系探索",
+  const galaxyIndex =
+    galaxy.index;
 
-      function () {
 
-        alert(
+  const starSystemCount =
+    seededInteger(
 
-          "🚧 恆星系探索正在建造中。\n\n" +
+      world.seed,
 
-          "下一階段將可以探索：\n" +
+      galaxy.id +
+      "-star-system-count",
 
-          "恆星 → 行星 → 衛星 → 文明 → 遺跡 → 神殿"
+      100,
 
-        );
-
-      }
+      10000
 
     );
 
 
-  grid.appendChild(
-    card
-  );
+  /*
+   * 目前每次最多顯示 30 個恆星系。
+   */
+
+  const visibleCount =
+    Math.min(
+      starSystemCount,
+      30
+    );
+
+
+  for (
+    let i = 0;
+    i < visibleCount;
+    i++
+  ) {
+
+    const starSystem =
+      getStarSystem(
+
+        superclusterIndex,
+
+        clusterIndex,
+
+        galaxyIndex,
+
+        i
+
+      );
+
+
+    const card =
+      createExplorationCard(
+
+        "⭐",
+
+        starSystem.name,
+
+        "恆星系",
+
+        "探索這個恆星系",
+
+        function () {
+
+          discoverObject(
+            starSystem.id
+          );
+
+
+          alert(
+
+            "⭐ 已進入「" +
+            starSystem.name +
+            "」。\n\n" +
+
+            "下一階段將探索：\n" +
+
+            "恆星 → 行星 → 衛星"
+
+          );
+
+        }
+
+      );
+
+
+    grid.appendChild(
+      card
+    );
+
+  }
 
 
   const notice =
@@ -1116,13 +1233,17 @@ function renderGalaxyPlaceholder(
 
   notice.innerHTML =
 
-    "🔭 你已抵達「" +
+    "⭐ 「" +
 
     galaxy.name +
 
-    "」。<br>" +
+    "」共有約 <strong>" +
 
-    "這裡將成為下一階段的星系探索入口。";
+    starSystemCount.toLocaleString() +
+
+    "</strong> 個恆星系。<br>" +
+
+    "目前顯示這個星系的第一批恆星系。";
 
 
   grid.appendChild(
