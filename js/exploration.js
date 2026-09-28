@@ -1225,27 +1225,43 @@ function renderGalaxyPlaceholder(
 
         "探索這個恆星系",
 
-        function () {
+function () {
 
-          discoverObject(
-            starSystem.id
-          );
+  discoverObject(
+    starSystem.id
+  );
 
 
-          alert(
+  explorationStack.push({
 
-            "⭐ 已進入「" +
-            starSystem.name +
-            "」。\n\n" +
+    type:
+      "starSystem",
 
-            "下一階段將探索：\n" +
+    name:
+      starSystem.name,
 
-            "恆星 → 行星 → 衛星"
+    id:
+      starSystem.id,
 
-          );
+    index:
+      starSystem.index,
 
-        }
+    galaxyIndex:
+      galaxyIndex,
 
+    clusterIndex:
+      clusterIndex,
+
+    superclusterIndex:
+      superclusterIndex
+
+  });
+
+
+  renderExploration();
+
+}
+         
       );
 
 
