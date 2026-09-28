@@ -610,7 +610,22 @@ function renderExploration() {
 
   }
 
+else if (
+  current.type ===
+  "starSystem"
+) {
 
+  status.textContent =
+    "探索恆星系";
+
+  renderStarSystem(
+    grid,
+    current
+  );
+
+}
+
+   
   updateDiscoveredCount();
 
 }
