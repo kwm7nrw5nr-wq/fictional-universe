@@ -928,11 +928,11 @@ function getStarSystem(
     starSystemIndex;
 
 
-  const name =
-
-    "第 " +
-    (starSystemIndex + 1) +
-    " 號恆星系";
+  const name = createExplorationName(
+  "starSystem",
+  starSystemIndex,
+  world.seed + "-" + id
+);
 
 
   return {
